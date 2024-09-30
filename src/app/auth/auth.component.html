@@ -1,0 +1,65 @@
+<main id="mainContainer">
+  <div id="switchContainer" #switchContainer>
+    <div #switchContainerDiv>
+      <h2>Vous avez un compte ?</h2>
+      <p>Nous vous attendions.</p>
+      <button (click)="switchToLoginPage()" role="button" class="button-1 buttonStyle2">Se connecter</button>
+    </div>
+
+    <div #switchContainerDiv>
+      <h2>Nouveau ici ?</h2>
+      <p>Rejoignez-nous dès maintenant.</p>
+      <button (click)="switchToSignUpPage()" role="button" class="button-1 buttonStyle2">S'inscrire</button>
+    </div>
+  </div>
+  <div id="formContainer">
+    <form [formGroup]="signInForm" id="signInForm" #signInform>
+      <h1>Connexion</h1>
+      <div class="formInput">
+        <label for="email1" style="display: none;">Email</label>
+        <i class="fa-solid fa-envelope"></i>
+        <input maxlength="36" formControlName="email" type="email" placeholder="Email" name="email" id="email1">
+      </div>
+      <div class="formInput">
+        <label for="password1" style="display: none;">Password</label>
+        <i (click)="showOrHidePassword($event)" class="fa-solid fa-eye"></i>
+        <input  maxlength="25" formControlName="password" type="password" placeholder="Mot de passe" name="password1"
+          id="password1">
+      </div>
+      <div>
+        <button [disabled]="signInForm.invalid" role="button" class="button-1">Se connecter</button>
+        <p>Se connecter avec google</p>
+        <button class="google-btn" role="button"><img src="../../assets/icons/google-icon.png"
+            alt="icon 3d de google"></button>
+      </div>
+    </form>
+
+    <form [formGroup]="signUpForm" id="signUpForm" #signUpform>
+      <h1>Inscription</h1>
+      <div class="formInput">
+        <label for="email2" style="display: none;">Email</label>
+        <i class="fa-solid fa-envelope"></i>
+        <input [ngClass]="{'invalid':getFormControl('email')?.dirty && getFormControl('email')?.invalid || (getFormControl('email')?.touched && getFormControl('email')?.invalid)}" maxlength="36" formControlName="email" type="email" placeholder="Email" name="email" id="email2">
+      </div>
+      <div class="formInput">
+        <label for="password1_bis" style="display: none;">Password</label>
+        <i (click)="showOrHidePassword($event)" class="fa-solid fa-eye"></i>
+        <input [ngClass]="{'invalid':getFormControl('password')?.dirty && getFormControl('password')?.invalid || (getFormControl('password')?.touched && getFormControl('password')?.invalid)}" maxlength="25" formControlName="password" type="password" placeholder="Mot de passe" name="password1_bis"
+          id="password1_bis">
+      </div>
+      <p [hidden]="getFormControl('password')?.valid || (getFormControl('password')?.untouched && getFormControl('password')?.pristine && getFormControl('password')?.invalid)">Le mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule et un chiffre.</p>
+      <div class="formInput">
+        <label for="password2" style="display: none;">Password confirmation</label>
+        <i (click)="showOrHidePassword($event)" class="fa-solid fa-eye"></i>
+        <input [ngClass]="{'invalid':getFormControl('confirmPassword')?.dirty && getFormControl('confirmPassword')?.valid && signUpForm.invalid && getFormControl('password')?.valid || (getFormControl('confirmPassword')?.touched && getFormControl('confirmPassword')?.invalid && getFormControl('password')?.valid)}" maxlength="25" formControlName="confirmPassword" type="password"
+          placeholder="Confirmation du mot de passe" name="password2" id="password2">
+      </div>
+      <div>
+        <button [disabled]="signUpForm.invalid" role="button" class="button-1">S'inscrire</button>
+        <p>S'inscrire avec google</p>
+        <button class="google-btn" role="button"><img src="../../assets/icons/google-icon.png"
+            alt="icon 3d de google"></button>
+      </div>
+    </form>
+  </div>
+</main>

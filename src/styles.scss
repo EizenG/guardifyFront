@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Oswald:wght@200..700&display=swap');
+@import 'variables';
+@import 'mediaQueries';
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: agdasima,sans-serif;
+  font-size: $mobile-body-text-size;
+  @include mediaMinWidth(1024px) {
+      font-size: $desktop-body-text-size;
+    }
+}
+
+
+h1,h2,h3,h4{
+  font-family: Oswald,sans-serif;
+}
+
+h1{
+  font-size: $mobile-h1-text-size;
+  @include mediaMinWidth(1024px) {
+     font-size: $desktop-h1-text-size;
+    }
+}
+
+h2 {
+  font-size: $mobile-h2-text-size;
+  @include mediaMinWidth(1024px) {
+      font-size: $desktop-h2-text-size;
+    }
+}
+
+h3 {
+  font-size: $mobile-h3-text-size;
+  @include mediaMinWidth(1024px) {
+      font-size: $desktop-h3-text-size;
+    }
+}
+
+body{
+  background-color: $primary-background;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  max-height: 100%;
+}
+
+#mainContainer{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
