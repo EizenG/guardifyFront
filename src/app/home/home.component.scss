@@ -1,27 +1,50 @@
 @import "../../variables";
 @import "../../mediaQueries";
 
+h5 {
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 500ms linear;
+}
+
+.expandMenu {
+  grid-template-columns: 90vw 1fr !important;
+
+  /* Gerer le responsive de la nav bar */
+  @include mediaMinWidth($width-homepage-breakpoint) {
+    grid-template-columns: 400px 1fr !important;
+  }
+}
+
 #mainContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  transition: grid-template-columns 500ms linear;
+  grid-template-rows: 1fr;
+  grid-template-areas: "navbar mainContent";
 
   nav {
+    grid-area: navbar;
     position: relative;
     min-width: 60px;
     max-height: 100vh;
-    width: 60px;
     padding: 30px 0;
+
     @media screen and (max-height:565px) {
-        padding: 15px 0;
+      padding: 15px 0;
     }
+
     background-color: $secondary-background;
 
     >div:first-child {
       cursor: pointer;
       width: 28px;
       height: 28px;
+
       @media screen and (max-height:565px) {
-          top: 25px;
+        top: 25px;
       }
+
       border: 1px solid white;
       background-color: $secondary-background;
       border-radius: 8px;
@@ -30,31 +53,48 @@
       top: 40px;
       display: flex;
 
-      i{
-        width: 16px;
-        height: 16px;
+      i {
+        font-size: 16px;
         rotate: 90deg;
         margin: auto;
+
       }
     }
 
     >div:nth-child(3) {
       height: calc(100vh - 60px);
+
       @media screen and (max-height:565px) {
-          height: calc(100vh - 30px);
+        height: calc(100vh - 30px);
       }
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
-      div:first-child {
+      >div:first-child {
         display: flex;
         padding-top: 50px;
         flex-direction: column;
         row-gap: 20px;
+
         @media screen and (max-height:565px) {
           row-gap: 10px;
         }
+
+        div {
+          display: flex;
+          align-items: center;
+          padding: 0 9px;
+          column-gap: 15px;
+        }
+      }
+
+      >div:last-child {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        padding: 0 9px
       }
     }
 
@@ -65,38 +105,101 @@
     }
 
     a {
-      display: block;
-      width: 70%;
-      margin: auto;
+      transition: padding-left 500ms linear;
     }
 
     img {
-      width: 100%;
-      margin: auto;
+      width: 42px;
+      height: 42px;
     }
   }
 
   main {
-    width: calc(100vw - 60px);
+    grid-area: mainContent;
+    min-width: calc(100vw - 60px);
     padding: 0 10px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    background: rgb(224, 224, 224);
+    background: linear-gradient(0deg, rgba(74, 74, 106, 0.6) 0%, rgba(224, 224, 224, 1) 100%);
 
     img {
       width: 100%;
       max-width: 332px;
       max-height: 56px;
       margin-bottom: 25px;
+
+      @include mediaMinWidth($width-homepage-breakpoint) {
+        align-self: flex-end;
+        max-width: 250px;
+        max-height: 50px;
+      }
     }
+
 
     h1,
     p {
       margin-bottom: 15px;
       max-width: 455px;
       text-align: center;
+    }
+
+    h1 {
+      @include mediaMinWidth($width-homepage-breakpoint) {
+        align-self: flex-start;
+        margin-bottom: 40px;
+      }
+    }
+
+    p {
+      @include mediaMinWidth($width-homepage-breakpoint) {
+        background-color: $secondary-background;
+        color: white;
+        border-radius: 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:nth-child(1) {
+          grid-area: p1;
+          height: 360px;
+        }
+
+        &:nth-child(2) {
+          grid-area: p2;
+          height: 240px;
+        }
+
+        &:nth-child(3) {
+          grid-area: p3;
+          height: 160px;
+        }
+      }
+    }
+
+    >div:first-child {
+      @include mediaMinWidth($width-homepage-breakpoint) {
+        min-width: min(calc(95vw - 60px), 1010px);
+        width: min(calc(95vw - 60px), 1010px);
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    >div:last-child {
+      @include mediaMinWidth($width-homepage-breakpoint) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: "p1 p2 p3";
+        column-gap: 20px;
+        min-width: min(calc(95vw - 60px), 1010px);
+        width: min(calc(95vw - 60px), 1010px);
+      }
     }
 
   }

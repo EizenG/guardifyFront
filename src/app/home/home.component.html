@@ -1,36 +1,57 @@
-<div id="mainContainer">
+<div id="mainContainer" #mainContainer>
   <nav>
-    <div>
+    <div (click)="expandMenu()">
       <i class="fa-solid fa-chevron-up" style="color:black;"></i>
     </div>
     <hr>
     <div>
+    <div>
       <div>
-      <a href=""><img src="../../assets/icons/add-photo.png" alt="icon add photo"></a>
-      <a href=""><img src="../../assets/icons/notepad.png" alt="icon notepad"></a>
-      <a href=""><img src="../../assets/icons/playlist.png" alt="icon playlist"></a>
-      <a href=""><img src="../../assets/icons/criteria.png" alt="icon criteria"></a>
-      <a href=""><img src="../../assets/icons/adjust.png" alt="icon parameter"></a>
+        <a href=""><img src="../../assets/icons/add-photo.png" alt="icon add photo"></a>
+        <h5 hidden #h5Tag>Ajouter une camera</h5>
+      </div>
+      <div>
+        <a href=""><img src="../../assets/icons/notepad.png" alt="icon notepad"></a>
+        <h5 hidden #h5Tag>Afficher les cameras</h5>
+      </div>
+      <div>
+        <a href=""><img src="../../assets/icons/playlist.png" alt="icon playlist"></a>
+        <h5 hidden #h5Tag>Afficher les videos infractions</h5>
+      </div>
+      <div>
+        <a href=""><img src="../../assets/icons/criteria.png" alt="icon criteria"></a>
+        <h5 hidden #h5Tag>Liste des suspects</h5>
+      </div>
+      <div>
+        <a href=""><img src="../../assets/icons/adjust.png" alt="icon parameter"></a>
+        <h5 hidden #h5Tag>Parametres</h5>
+      </div>
       </div>
       <div>
         <a href=""><img src="../../assets/icons/login.png" alt="icon login"></a>
+        <h5 #h5Tag>Inscription / Connexion</h5>
       </div>
     </div>
   </nav>
   <main>
-    <img src="../../assets/icons/logo.svg" alt="logo guardify">
-    <h1>Bienvenue sur Guardify</h1>
-    <p>
-      La sécurité de votre espace est notre priorité. Grâce à notre système avancé de vidéosurveillance, vous pouvez
-      surveiller vos locaux en temps réel, accéder facilement aux enregistrements, et recevoir des alertes instantanées en cas
-      d'activité suspecte.
-    </p>
-    <p>
-      Avec Guardify gardez un œil sur ce qui compte, où que vous soyez. Configurez vos caméras, gérez les accès, et
-      assurez-vous que chaque instant critique est capturé et sauvegardé.
-    </p>
-    <p>
-      Prenez le contrôle de votre sécurité dès aujourd'hui.
-    </p>
+    <div>
+      <img src="../../assets/icons/logo.svg" alt="logo guardify">
+      <h1>Bienvenue sur Guardify</h1>
+    </div>
+    <div>
+      <p>
+        La sécurité de votre espace est notre priorité. Grâce à notre système avancé de vidéosurveillance, vous pouvez
+        surveiller vos locaux en temps réel, accéder facilement aux enregistrements, et recevoir des alertes instantanées en
+        cas
+        d'activité suspecte.
+      </p>
+      <p>
+        Avec Guardify gardez un œil sur ce qui compte, où que vous soyez. Configurez vos caméras, gérez les accès, et
+        assurez-vous que chaque instant critique est capturé et sauvegardé.
+      </p>
+      <p>
+        Prenez le contrôle de votre sécurité dès aujourd'hui.
+      </p>
+    </div>
   </main>
 </div>
