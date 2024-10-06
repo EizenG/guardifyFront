@@ -183,6 +183,7 @@ button[disabled]{
     font-size: 10px;
     padding-left: 15px;
     width: 306px;
+    margin-bottom: 0;
     @include mediaMinWidth(1024px) {
         width: min(90%, 390px);
     }
