@@ -1,7 +1,8 @@
 
 export interface Camera{
-   ID : string;
-   Localisation : string;
-   Permissions : number[];
-   Status : boolean;
+   id_camera : string;
+   location : string;
+   permissions : number[];
+   status : boolean;
+   isOwner : boolean;
 }

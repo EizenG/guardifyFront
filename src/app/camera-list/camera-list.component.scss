@@ -70,12 +70,58 @@ main{
     margin: 20px auto;
   }
 
-  // Card for camera
+}
 
-  .card{
-    height: 100px;
-    border: 1px solid red;
-  }
+#cameraList{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-block: 25px;
+
+  // Card for camera
+  
+    .cameraCard {
+      position: relative;
+      height: 100px;
+      width: 95vw;
+      min-width: 273px;
+      margin-inline: auto;
+      display: flex;
+      border-radius: 3px;
+      flex-direction: row;
+      background-color: $primary-background;
+  
+  
+      >div:first-child {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 110px;
+        clip-path: polygon(0 0, 57% 0, 100% 100%, 0% 100%);
+        border-radius: 3px 0 0 3px;
+
+        div {
+          height: 90px;
+          width: 100px;
+          background-color: white;
+          clip-path: polygon(0 0, 54% 0, 97% 100%, 0% 100%);
+        }
+      }
+  
+      >div:last-child {
+        height: 100%;
+        width: calc(100% - 63px);
+        margin-left: 63px;
+        clip-path: polygon(0% 0%, 100% 0, 100% 100%, 47px 100%);
+
+        p{
+          padding-left: 50px;
+          padding-top: 5px;
+        }
+      }
+    }
 }
 
 

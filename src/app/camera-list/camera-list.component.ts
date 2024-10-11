@@ -1,21 +1,19 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Camera } from '../customType/camera';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-camera-list',
   standalone: true,
-  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule],
+  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination],
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })
-export class CameraListComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-    this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
-  }
-
+export class CameraListComponent implements AfterViewInit,OnInit {
+  // Pour la suite je dois ajouter un champ de filtre pour l'ID
   dropdownListPermissions = [
     { item_id: 1, item_text: "Modifier les paramètres"},
     { item_id: 2, item_text: "Afficher le flux vidéo" },
@@ -43,96 +41,116 @@ export class CameraListComponent implements AfterViewInit {
     textField: "item_text",
   };
 
+  page = 1;
+  pageSize = 4;
+
+  //il faut limiter le champ location a 40 caracteres
+  items : Camera[] = []
   fakeData: Camera[] = [
     {
-      "ID": "47392",
-      "Localisation": "Auchan Dakar Sud",
-      "Permissions": [2, 4],
-      "Status": true
+      "id_camera": "47392",
+      "location": "Auchan Dakar Sud",
+      "permissions": [2, 4],
+      "status": true,
+      "isOwner": true
     },
     {
-      "ID": "58374",
-      "Localisation": "Carrefour Mbour Nord",
-      "Permissions": [1, 3],
-      "Status": false
+      "id_camera": "58374",
+      "location": "Carrefour Mbour Nord",
+      "permissions": [1, 3],
+      "status": false,
+      "isOwner": false
     },
     {
-      "ID": "78921",
-      "Localisation": "Auchan Thiès Ouest",
-      "Permissions": [1, 2],
-      "Status": true
+      "id_camera": "78921",
+      "location": "Auchan Thiès Ouest",
+      "permissions": [1, 2],
+      "status": true,
+      "isOwner": false
     },
     {
-      "ID": "91234",
-      "Localisation": "Super U Rufisque Centre",
-      "Permissions": [3, 5],
-      "Status": true
+      "id_camera": "91234",
+      "location": "Super U Rufisque Centre",
+      "permissions": [3, 5],
+      "status": true,
+      "isOwner": true
     },
     {
-      "ID": "13467",
-      "Localisation": "Auchan Saint-Louis",
-      "Permissions": [1, 3],
-      "Status": false
+      "id_camera": "13467",
+      "location": "Auchan Saint-Louis",
+      "permissions": [1, 3],
+      "status": false,
+      "isOwner": true
     },
     {
-      "ID": "25678",
-      "Localisation": "Super U Dakar Plateau",
-      "Permissions": [1, 2],
-      "Status": true
+      "id_camera": "25678",
+      "location": "Super U Dakar Plateau",
+      "permissions": [1, 2],
+      "status": true,
+      "isOwner": false
     },
     {
-      "ID": "34892",
-      "Localisation": "Auchan Mbour Sud",
-      "Permissions": [2, 5],
-      "Status": false
+      "id_camera": "34892",
+      "location": "Auchan Mbour Sud",
+      "permissions": [2, 5],
+      "status": false,
+      "isOwner": false
     },
     {
-      "ID": "47389",
-      "Localisation": "Carrefour Thiès Est",
-      "Permissions": [1, 4],
-      "Status": true
+      "id_camera": "47389",
+      "location": "Carrefour Thiès Est",
+      "permissions": [1, 4],
+      "status": true,
+      "isOwner": true
     },
     {
-      "ID": "58213",
-      "Localisation": "Auchan Dakar Nord",
-      "Permissions": [3, 5],
-      "Status": true
+      "id_camera": "58213",
+      "location": "Auchan Dakar Nord",
+      "permissions": [3, 5],
+      "status": true,
+      "isOwner": false
     },
     {
-      "ID": "93458",
-      "Localisation": "Carrefour Kaolack",
-      "Permissions": [2, 3],
-      "Status": false
+      "id_camera": "93458",
+      "location": "Carrefour Kaolack",
+      "permissions": [2, 3],
+      "status": false,
+      "isOwner": false
     },
     {
-      "ID": "23984",
-      "Localisation": "Super U Ziguinchor",
-      "Permissions": [1, 4],
-      "Status": true
+      "id_camera": "23984",
+      "location": "Super U Ziguinchor",
+      "permissions": [1, 4],
+      "status": true,
+      "isOwner": true
     },
     {
-      "ID": "19872",
-      "Localisation": "Auchan Matam",
-      "Permissions": [2, 3],
-      "Status": false
+      "id_camera": "19872",
+      "location": "Auchan Matam",
+      "permissions": [2, 3],
+      "status": false,
+      "isOwner": false
     },
     {
-      "ID": "58743",
-      "Localisation": "Super U Fatick",
-      "Permissions": [1, 5],
-      "Status": true
+      "id_camera": "58743",
+      "location": "Super U Fatick",
+      "permissions": [1, 5],
+      "status": true,
+      "isOwner": false
     },
     {
-      "ID": "64573",
-      "Localisation": "Carrefour Louga",
-      "Permissions": [3, 4],
-      "Status": false
+      "id_camera": "64573",
+      "location": "Carrefour Louga",
+      "permissions": [3, 4],
+      "status": false,
+      "isOwner": true
     },
     {
-      "ID": "38975",
-      "Localisation": "Auchan Diourbel",
-      "Permissions": [2, 4],
-      "Status": true
+      "id_camera": "38975",
+      "location": "Auchan Diourbel",
+      "permissions": [2, 4],
+      "status": true,
+      "isOwner": true
     }
   ]
   
@@ -184,6 +202,19 @@ export class CameraListComponent implements AfterViewInit {
         this.printFontAwesomeIcon(item);
       });   
     },10);  
+  }
+
+  loadPageData($event: number) {
+    const startIndex = (this.page - 1) * this.pageSize; // Calcul de l'index de début
+    const endIndex = startIndex + this.pageSize; // Calcul de l'index de fin
+    this.items = this.fakeData.slice(startIndex, endIndex); // Slicing des éléments
+  }
+  ngAfterViewInit(): void {
+    this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
+  }
+
+  ngOnInit(): void {
+      this.items = this.fakeData.slice(0,4);
   }
 
 }
