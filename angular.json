@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/ng-multiselect-dropdown.theme.scss"
             ],
             "scripts": []
           },

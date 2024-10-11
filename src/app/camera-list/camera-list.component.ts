@@ -1,14 +1,47 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Camera } from '../customType/camera';
+import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-camera-list',
   standalone: true,
-  imports: [],
+  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule],
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })
-export class CameraListComponent {
+export class CameraListComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
+  }
+
+  dropdownListPermissions = [
+    { item_id: 1, item_text: "Modifier les paramètres"},
+    { item_id: 2, item_text: "Afficher le flux vidéo" },
+    { item_id: 3, item_text: "Voir les vidéos d'infractions" },
+  ];
+  dropdownListStatus = [
+    { item_id: 1, item_text: "Actif" },
+    { item_id: 2, item_text: "Inactif" },
+  ];
+  dropdownBtnList !: NodeList;
+  selectedItemsPermissions = [];
+  selectedItemsStatus = "";
+  dropdownSettingsPermissions : IDropdownSettings = {
+    singleSelection : false,
+    enableCheckAll : true,
+    selectAllText : "Tout sélectionner",
+    unSelectAllText: "Tout désélectionner",
+    idField : "item_id",
+    textField: "item_text",
+  };
+
+  dropdownSettings2: IDropdownSettings = {
+    singleSelection: true,
+    idField: "item_id",
+    textField: "item_text",
+  };
 
   fakeData: Camera[] = [
     {
@@ -102,7 +135,55 @@ export class CameraListComponent {
       "Status": true
     }
   ]
-
   
+  onItemSelectStatus(item: any) {
+    let children: HTMLCollection;
+    setTimeout(()=>{
+      children = (this.dropdownBtnList[0] as HTMLSpanElement).children;
+      if (item.item_text == "Actif") {
+        children[0].innerHTML = children[0].innerHTML + '<i style="font-size:24.45px;color:green;" class="fa-solid fa-earth-africa"></i>';
+      } else {
+        children[0].innerHTML = children[0].innerHTML + '<i style="font-size:24.45px;color:red;" class="fa-solid fa-earth-africa"></i>';
+      }
+    },10);
+  }
+  onSelectAllStatus(items: any) {
+    return;
+  }
+
+  printFontAwesomeIcon(item : any){
+    if (item.children[0].children[0].textContent?.includes("Modifier")) {
+      if (item.children.length == 1)
+        item.innerHTML = item.innerHTML + '<i style="font-size:24.45px;" class="fa-regular fa-pen-to-square"></i>';
+    } else if (item.children[0].children[0].textContent?.includes("Afficher")) {
+      if (item.children.length == 1)
+        item.innerHTML = item.innerHTML + '<i style="font-size:24.45px;" class="fa-solid fa-video"></i>';
+    } else if (item.children[0].children[0].textContent?.includes("Voir")) {
+      if (item.children.length == 1)
+        item.innerHTML = item.innerHTML + '<i style="font-size:24.45px;" class="fa-solid fa-file-video"></i>';
+    }
+  }
+
+  onItemSelectPermissions(item: any) {
+    setTimeout(()=>{
+      let children: HTMLCollection = (this.dropdownBtnList[1] as HTMLSpanElement).children;
+      Array.from(children).forEach((item) => {
+        if(item.classList.contains("selected-item-container")){
+          this.printFontAwesomeIcon(item);  
+        }
+      });
+    },10);
+    
+  }
+  onSelectAllPermissions(items: any) {
+    setTimeout(()=>{
+      let children: any = (this.dropdownBtnList[1] as HTMLSpanElement).children;
+      children = Array.from(children).slice(0,-1);
+      console.log(children)
+      Array.from(children).forEach((item : any)=>{
+        this.printFontAwesomeIcon(item);
+      });   
+    },10);  
+  }
 
 }

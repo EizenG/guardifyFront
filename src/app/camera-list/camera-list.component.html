@@ -9,5 +9,36 @@
   </nav>
   <main>
     <h1>Liste des caméras</h1>
+    <div>
+      <input placeholder="Filtrer par localisation" type="search" name="localisation" id="localisation">
+      <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div>
+        <ng-multiselect-dropdown 
+            [placeholder]="'Statut'" 
+            [settings]="dropdownSettings2" 
+            [data]="dropdownListStatus"
+            [(ngModel)] ="selectedItemsStatus" 
+            (onSelect)="onItemSelectStatus($event)" 
+            (onSelectAll)="onSelectAllStatus($event)">
+        </ng-multiselect-dropdown>
+        
+        <ng-multiselect-dropdown 
+            [placeholder]="'Permissions'" 
+            [settings]="dropdownSettingsPermissions" 
+            [data]="dropdownListPermissions"
+            [(ngModel)] ="selectedItemsPermissions" 
+            (onSelect)="onItemSelectPermissions($event)" 
+            (onSelectAll)="onSelectAllPermissions($event)">
+      </ng-multiselect-dropdown>
+    </div>
+
+    <div id="cameraList">
+      <div class="card">
+    
+      </div>
+    </div>
+
+    
   </main>
 </div>

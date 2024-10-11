@@ -1,0 +1,39 @@
+@import "./variables"; /*me*/
+
+$base-color:$secondary-background; /*me*/
+$disable-background-color: #eceeef;
+
+.dropdown-multiselect__caret:before{
+  border-color: white transparent!important;/*me*/
+}
+
+.selected-item-container{
+  margin-right: 10px!important;/*me*/
+}
+
+.multiselect-dropdown {
+  .dropdown-btn {
+    border: 1px solid $primary-background!important; /*me*/
+    height: 38.45px!important;/*me*/
+    .selected-item {
+      display: none!important;//
+      background: $primary-background!important;/*me*/
+      /*me*/
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      min-width: 115px;
+      /*me*/
+      
+      span,a{
+        color: black !important; /*me*/
+        font-size: 10px !important;/*me*/
+      }
+    }
+
+    span {
+      color: white !important;/*me*/
+      font-weight: bold;/*me*/
+    }
+  }
+}
