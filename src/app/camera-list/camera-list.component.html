@@ -10,7 +10,7 @@
   <main>
     <h1>Liste des caméras</h1>
     <div>
-      <input placeholder="Filtrer par localisation" type="search" name="localisation" id="localisation">
+      <input placeholder="Filtrer par localisation ou id" type="search" name="localisation" id="localisation">
       <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div>
@@ -50,18 +50,12 @@
           </p>
         </div>
       </div>
-      <ngb-pagination
-        [collectionSize]="fakeData.length"
-        [(page)]="page"
-        [pageSize]="pageSize"
-        [boundaryLinks]="true"
-        [maxSize]="2"
-        aria-label="Pagination"
-        class="mt-3 d-flex justify-content-center"
-        (pageChange)="loadPageData($event)"
-      ></ngb-pagination>
     </div>
-
+    <div style="width: 100%;">
+      <ngb-pagination [collectionSize]="fakeData.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"
+        [maxSize]="2" aria-label="Pagination" class="mt-3 d-flex justify-content-center"
+        (pageChange)="loadPageData($event)"></ngb-pagination>
+    </div>
     
   </main>
 </div>

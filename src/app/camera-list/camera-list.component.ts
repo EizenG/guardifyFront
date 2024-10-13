@@ -42,7 +42,7 @@ export class CameraListComponent implements AfterViewInit,OnInit {
   };
 
   page = 1;
-  pageSize = 4;
+  pageSize = 10;
 
   //il faut limiter le champ location a 40 caracteres
   items : Camera[] = []
@@ -197,7 +197,6 @@ export class CameraListComponent implements AfterViewInit,OnInit {
     setTimeout(()=>{
       let children: any = (this.dropdownBtnList[1] as HTMLSpanElement).children;
       children = Array.from(children).slice(0,-1);
-      console.log(children)
       Array.from(children).forEach((item : any)=>{
         this.printFontAwesomeIcon(item);
       });   
@@ -214,7 +213,7 @@ export class CameraListComponent implements AfterViewInit,OnInit {
   }
 
   ngOnInit(): void {
-      this.items = this.fakeData.slice(0,4);
+      this.items = this.fakeData.slice(0,11);
   }
 
 }

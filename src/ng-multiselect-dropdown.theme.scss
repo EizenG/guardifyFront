@@ -12,6 +12,9 @@ $disable-background-color: #eceeef;
 }
 
 .multiselect-dropdown {
+  max-width: 315px !important;
+  margin-inline: auto;
+  
   .dropdown-btn {
     border: 1px solid $primary-background!important; /*me*/
     height: 38.45px!important;/*me*/
