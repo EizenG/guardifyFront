@@ -50,6 +50,20 @@ body{
   max-height: 100%;
 }
 
+#cornerWhiteDiv {
+  background-color: $primary-background;
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  position: absolute;
+  left: -55px;
+  top: -55px;
+
+  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
+    display: none;
+  }
+}
+
 #mainContainer{
   position: relative;
   overflow: hidden;

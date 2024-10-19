@@ -4,11 +4,12 @@ import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-d
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-camera-list',
   standalone: true,
-  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination],
+  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination,RouterLink],
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })

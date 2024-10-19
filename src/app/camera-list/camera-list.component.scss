@@ -8,19 +8,6 @@
   position: relative;
 }
 
-#cornerWhiteDiv {
-  background-color: $primary-background;
-  height: 130px;
-  width: 130px;
-  border-radius: 50%;
-  position: absolute;
-  left: -55px;
-  top: -55px;
-  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-      display: none;
-    }
-}
-
 nav {
   position: relative;
   display: flex;

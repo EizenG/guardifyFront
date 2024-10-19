@@ -17,8 +17,8 @@
     <div>
     <div>
       <div>
-        <a href=""><img src="../../assets/icons/add-photo.png" alt="icon add photo"></a>
-        <h5 hidden #h5Tag>Ajouter une camera</h5>
+        <a routerLink="/add-camera"><img src="../../assets/icons/add-photo.png" alt="icon add photo"></a>
+        <h5 (click)="navigateTo('/add-camera')" hidden #h5Tag>Ajouter une camera</h5>
       </div>
       <div>
         <a routerLink="/camera-list"><img src="../../assets/icons/notepad.png" alt="icon notepad"></a>
