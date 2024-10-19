@@ -109,4 +109,8 @@ export class HomeComponent implements OnDestroy {
   changeSuccessMessage(message: string) {
     this._messageSuccess$.next(message);
   }
+
+  navigateTo(url : string){
+    this.router.navigate([url]);
+  }
 }

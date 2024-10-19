@@ -43,6 +43,7 @@ export class AuthComponent implements OnDestroy {
   createUserSubscription : Subscription | null = null;
   signInSubscription : Subscription | null = null;
   errorMessageSubscription: Subscription | null = null;
+  signInWithGoogleSubscription: Subscription | null = null;
 
   // Services
   firebaseService = inject(FirebaseService);
@@ -67,6 +68,10 @@ export class AuthComponent implements OnDestroy {
 
     if(this.errorMessageSubscription){
       this.errorMessageSubscription.unsubscribe();
+    }
+
+    if(this.signInWithGoogleSubscription){
+      this.signInWithGoogleSubscription.unsubscribe();
     }
   }
 
@@ -168,5 +173,17 @@ export class AuthComponent implements OnDestroy {
 
   changeErrorMessage(message : string) {
     this._message$.next(message);
+  }
+
+  signInWithGoogle(){
+    this.signInWithGoogleSubscription = this.firebaseService.signInWithGoogle()
+    .subscribe({
+      next : (data : any) =>{
+        console.log(data);
+      },
+      error : (error) =>{
+        console.log(error);
+      }
+    });
   }
 }
