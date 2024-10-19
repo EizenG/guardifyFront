@@ -2,6 +2,9 @@
   @if (errorMessage) {
   <ngb-alert #selfClosingAlert type="danger" (closed)="errorMessage = ''">{{ errorMessage }}</ngb-alert>
   }
+  @if (errorMessage2) {
+  <ngb-alert #selfClosingAlert2 type="danger" (closed)="errorMessage2 = ''">{{ errorMessage2 }}</ngb-alert>
+  }
 </div>
 
 <main id="mainContainer">

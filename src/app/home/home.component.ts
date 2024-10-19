@@ -36,7 +36,7 @@ export class HomeComponent implements OnDestroy {
   constructor(private cdref : ChangeDetectorRef){
     onAuthStateChanged(this.firebaseService.firebaseAuth, (user) =>{
       if(user){
-        this.userUid = user.uid;
+        this.userUid = user.email;
       }else{
         this.userUid = null;
       }

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, tap } from 'rxjs/operators';
+import { browserSessionPersistence, setPersistence } from '@angular/fire/auth';
 
 
 
@@ -37,12 +38,16 @@ export class AuthComponent implements OnDestroy {
   @ViewChildren("switchContainerDiv") switchContainerDivList !: QueryList<ElementRef>;
 
   @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert !: NgbAlert;
+  @ViewChild('selfClosingAlert2', { static: false }) selfClosingAlert2 !: NgbAlert;
   errorMessage = '';
+  errorMessage2 = '';
   private _message$ = new Subject<string>();
+  private _message2$ = new Subject<string>();
 
   createUserSubscription : Subscription | null = null;
   signInSubscription : Subscription | null = null;
   errorMessageSubscription: Subscription | null = null;
+  errorMessage2Subscription: Subscription | null = null;
   signInWithGoogleSubscription: Subscription | null = null;
 
   // Services
@@ -59,6 +64,14 @@ export class AuthComponent implements OnDestroy {
         debounceTime(5000),
       )
       .subscribe(() => this.selfClosingAlert?.close());
+
+    this.errorMessage2Subscription = this._message2$
+      .pipe(
+        takeUntilDestroyed(),
+        tap((message) => (this.errorMessage2 = message)),
+        debounceTime(5000),
+      )
+      .subscribe(() => this.selfClosingAlert2?.close());
   }
 
   ngOnDestroy(): void {
@@ -68,6 +81,10 @@ export class AuthComponent implements OnDestroy {
 
     if(this.errorMessageSubscription){
       this.errorMessageSubscription.unsubscribe();
+    }
+
+    if (this.errorMessage2Subscription) {
+      this.errorMessage2Subscription.unsubscribe();
     }
 
     if(this.signInWithGoogleSubscription){
@@ -155,19 +172,7 @@ export class AuthComponent implements OnDestroy {
         email : this.signInForm.get("email")?.value as string ,
         password : this.signInForm.get("password")?.value as string,
       }
-      this.signInSubscription = this.firebaseService.signIn(formData.email,formData.password)
-      .subscribe({
-        next : (data : any) => {
-          this.router.navigate(["./"]);
-        },
-        error : (error : any) => {
-          if (error.code == "auth/invalid-credential"){
-            this.changeErrorMessage("Attention les informations de connexion sont incorrectes !!!");
-          }else{
-            this.changeErrorMessage("Attention une erreur est survenue !!!");
-          }
-        }
-      })
+      this.signIn(formData);
     }
   }
 
@@ -175,14 +180,35 @@ export class AuthComponent implements OnDestroy {
     this._message$.next(message);
   }
 
+  changeErrorMessage2(message: string) {
+    this._message2$.next(message);
+  }
+
+  signIn(formData : any){
+    this.signInSubscription = this.firebaseService.signIn(formData.email, formData.password)
+      .subscribe({
+        next: (data: any) => {
+          this.router.navigate(["./"]);
+        },
+        error: (error: any) => {
+          if (error.code == "auth/invalid-credential") {
+            this.changeErrorMessage("Attention les informations de connexion sont incorrectes !!!");
+            this.changeErrorMessage2("Si vous aviez un compte, essayez de vous connecter avec votre compte Google associé à l'email utilisé précédemment.");
+          } else {
+            this.changeErrorMessage("Attention une erreur est survenue !!!");
+          }
+        }
+      });
+  }
+
   signInWithGoogle(){
     this.signInWithGoogleSubscription = this.firebaseService.signInWithGoogle()
     .subscribe({
-      next : (data : any) =>{
-        console.log(data);
+      next : () =>{
+        this.router.navigate(['./']);
       },
-      error : (error) =>{
-        console.log(error);
+      error : () =>{
+        this.changeErrorMessage("Attention une erreur est survenue !!!");
       }
     });
   }
