@@ -1,6 +1,6 @@
 <div id="mainContainer">
   <div id="cornerWhiteDiv"></div>
-  <nav>
+  <nav #getEltHeight>
     <a href="#"><img src="../../assets/icons/notepad.png" alt="notepad icon"></a>
     <div>
       <a href="#"><img src="../../assets/icons/info (1).png" alt="info icon"></a>
@@ -8,12 +8,12 @@
     </div>
   </nav>
   <main>
-    <h1>Liste des caméras</h1>
-    <div>
+    <h1 #getEltHeight>Liste des caméras</h1>
+    <div #getEltHeight>
       <input placeholder="Filtrer par localisation ou id" type="search" name="localisation" id="localisation">
       <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
-    <div>
+    <div #getEltHeight>
         <ng-multiselect-dropdown 
             [placeholder]="'Statut'" 
             [settings]="dropdownSettings2" 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Camera } from '../customType/camera';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,8 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './camera-list.component.scss'
 })
 export class CameraListComponent implements AfterViewInit,OnInit {
-  // Pour la suite je dois ajouter un champ de filtre pour l'ID
+  @ViewChildren("getEltHeight") eltsBeforeList !: QueryList<ElementRef>;
+
   dropdownListPermissions = [
     { item_id: 1, item_text: "Modifier les paramètres"},
     { item_id: 2, item_text: "Afficher le flux vidéo" },
@@ -153,6 +154,8 @@ export class CameraListComponent implements AfterViewInit,OnInit {
       "isOwner": true
     }
   ]
+
+  constructor(private cdref: ChangeDetectorRef){}
   
   onItemSelectStatus(item: any) {
     let children: HTMLCollection;
@@ -209,11 +212,31 @@ export class CameraListComponent implements AfterViewInit,OnInit {
     this.items = this.fakeData.slice(startIndex, endIndex); // Slicing des éléments
   }
   ngAfterViewInit(): void {
+    let totalHeight = 0;
+    this.eltsBeforeList.forEach(item =>{
+      let computedStyle = window.getComputedStyle(item.nativeElement);
+      totalHeight += item.nativeElement.offsetHeight;
+      totalHeight += parseFloat(computedStyle['marginTop']);
+      totalHeight += parseFloat(computedStyle['marginBottom']);
+    });
+    if ((window.innerHeight - totalHeight) > 0)
+      this.pageSize = Math.trunc((window.innerHeight - totalHeight) / 100) - 1;
+    else
+      this.pageSize = 5;
+
+    if(window.innerWidth >= 1240){
+      this.pageSize *= 3;
+    }else if(window.innerWidth > 830){
+      this.pageSize *= 2;
+    }
+    
+    this.items = this.fakeData.slice(0, this.pageSize);
+    this.cdref.detectChanges();
     this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
   }
 
   ngOnInit(): void {
-      this.items = this.fakeData.slice(0,11);
+      
   }
 
 }

@@ -1,3 +1,9 @@
+<div id="OperationResultInf">
+  @if (errorMessage) {
+  <ngb-alert #selfClosingAlert type="danger" (closed)="errorMessage = ''">{{ errorMessage }}</ngb-alert>
+  }
+</div>
+
 <main id="mainContainer">
   <div id="switchContainer" #switchContainer>
     <div #switchContainerDiv>
@@ -13,7 +19,7 @@
     </div>
   </div>
   <div id="formContainer">
-    <form [formGroup]="signInForm" id="signInForm" #signInform>
+    <form [formGroup]="signInForm" (submit)="submitSignInForm()" id="signInForm" #signInform>
       <h1>Connexion</h1>
       <div class="formInput">
         <label for="email1" style="display: none;">Email</label>
@@ -34,7 +40,7 @@
       </div>
     </form>
 
-    <form [formGroup]="signUpForm" id="signUpForm" #signUpform>
+    <form [formGroup]="signUpForm" id="signUpForm" (ngSubmit)="submitSignUpForm()" #signUpform>
       <h1>Inscription</h1>
       <div class="formInput">
         <label for="email2" style="display: none;">Email</label>
