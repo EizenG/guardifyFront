@@ -40,7 +40,7 @@
       <div>
         <button *ngIf="!userUid" (click)="handleLogin()" ><img src="../../assets/icons/login.png" alt="icon login"></button>
         <button *ngIf="userUid" (click)="handleLogout()"><img src="../../assets/icons/logout.png" alt="icon login"></button>
-        <h5 #h5Tag> {{ (userUid)?"Déconnexion":"Inscription / Connexion" }}</h5>
+        <h5 (click)="handleLogout()" #h5Tag> {{ (userUid)?"Déconnexion":"Inscription / Connexion" }}</h5>
       </div>
     </div>
   </nav>

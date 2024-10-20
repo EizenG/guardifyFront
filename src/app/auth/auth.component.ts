@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, tap } from 'rxjs/operators';
-import { browserSessionPersistence, setPersistence } from '@angular/fire/auth';
 
 
 

@@ -6,5 +6,30 @@
   </nav>
   <main>
     <h1>Ajouter une camera</h1>
+    <form [formGroup] = "addCameraForm">
+      <div>
+        <label for="id_camera"></label>
+        <input placeholder="Identifiant de la camera" formControlName = "id_camera" type="text" name="id_camera" id="id_camera">
+      </div>
+
+      <div>
+        <label for="localisation"></label>
+        <input placeholder="Localisation : Auchan-Mbour-Entre" formControlName="localisation" type="text" name="localisation " id="localisation">
+      </div>
+      
+      <div>
+        <div class="checkbox-wrapper-5">
+          <div class="check">
+            <input formControlName="status" type="checkbox" name="status " id="status">
+            <label for="status"></label>
+          </div>
+        </div>
+        <p>Est actif</p>
+      </div>
+      <div>
+        <button class="button-33" type="submit" role="button">Ajouter</button>
+        <button class="button-33" type="button" role="button">Lier des users</button>
+      </div>
+    </form>
   </main>
 </div>

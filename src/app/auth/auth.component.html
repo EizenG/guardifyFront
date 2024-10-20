@@ -36,9 +36,9 @@
           id="password1">
       </div>
       <div>
-        <button [disabled]="signInForm.invalid" role="button" class="button-1">Se connecter</button>
+        <button type="submit" [disabled]="signInForm.invalid" role="button" class="button-1">Se connecter</button>
         <p>Se connecter avec google</p>
-        <button class="google-btn" role="button" (click)="signInWithGoogle()"><img src="../../assets/icons/google-icon.png"
+        <button type="button" class="google-btn" role="button" (click)="signInWithGoogle()"><img src="../../assets/icons/google-icon.png"
             alt="icon 3d de google"></button>
       </div>
     </form>
@@ -64,9 +64,9 @@
           placeholder="Confirmation du mot de passe" name="password2" id="password2">
       </div>
       <div>
-        <button [disabled]="signUpForm.invalid" role="button" class="button-1">S'inscrire</button>
+        <button type="submit" [disabled]="signUpForm.invalid" role="button" class="button-1">S'inscrire</button>
         <p>S'inscrire avec google</p>
-        <button class="google-btn" role="button" (click)="signInWithGoogle()"><img src="../../assets/icons/google-icon.png"
+        <button type="button" class="google-btn" role="button" (click)="signInWithGoogle()"><img src="../../assets/icons/google-icon.png"
             alt="icon 3d de google"></button>
       </div>
     </form>
