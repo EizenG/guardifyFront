@@ -1,0 +1,17 @@
+{
+  "sidebar": {
+    "add_camera": "Add a camera",
+    "view_cameras": "View cameras",
+    "view_infractions": "View infraction videos",
+    "suspect_list": "Suspect list",
+    "settings": "Settings",
+    "login": "Sign Up / Login",
+    "logout" : "Logout"
+  },
+  "home": {
+    "welcome": "Welcome to Guardify",
+    "description_1": "The security of your space is our priority. With our advanced surveillance system, you can monitor your premises in real time, easily access recordings, and receive instant alerts in case of suspicious activity.",
+    "description_2": "With Guardify, keep an eye on what matters, wherever you are. Configure your cameras, manage access, and ensure that every critical moment is captured and saved.",
+    "description_3": "Take control of your security today."
+  }
+}
