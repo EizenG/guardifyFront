@@ -13,5 +13,14 @@
     "description_1": "La sécurité de votre espace est notre priorité. Grâce à notre système avancé de vidéosurveillance, vous pouvez surveiller vos locaux en temps réel, accéder facilement aux enregistrements, et recevoir des alertes instantanées en cas d'activité suspecte.",
     "description_2": "Avec Guardify gardez un œil sur ce qui compte, où que vous soyez. Configurez vos caméras, gérez les accès, et assurez-vous que chaque instant critique est capturé et sauvegardé.",
     "description_3": "Prenez le contrôle de votre sécurité dès aujourd'hui."
+  },
+
+  "addCameraPage" : {
+    "add_camera": "Ajouter une camera",
+    "camera_id": "Identifiant de la camera",
+    "location": "Localisation : Auchan-Mbour-Entre",
+    "is_active": "Est actif",
+    "add_button": "Ajouter",
+    "link_users": "Lier des users"
   }
 }
