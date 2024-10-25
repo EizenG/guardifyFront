@@ -95,4 +95,9 @@ main{
       margin-top: 40px;
     }
   }
+
+  .button-33:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }

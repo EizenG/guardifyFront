@@ -1,9 +1,27 @@
+<div id="popupLayer" [ngStyle]="{'display' : (isPopupVisible)?'flex':'none'}">
+  <div id="popup">
+    <div><i (click)="isPopupVisible = false;" class="fa-solid fa-xmark"></i></div>
+    <div>
+      <h4>Permissions</h4>
+      <ol>
+        <li>Modifiers les details de la camera</li>
+        <li>Visualiser le flux video de la camera</li>
+        <li>Acces aux videos d'infractions de la camera</li>
+      </ol>
+      <h4>Autres</h4>
+      <ul>
+        <li><img src="../../assets/icons/ownership1.png" alt="icon ownerchip">Vous etes le proprietaire de la camera.</li>
+        <li><img src="../../assets/icons/ownership2.png" alt="icon ownerchip">L'acces a la camera vous a ete octroyer.</li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div id="mainContainer">
   <div id="cornerWhiteDiv"></div>
   <nav #getEltHeight>
     <a href="#"><img src="../../assets/icons/notepad.png" alt="notepad icon"></a>
     <div>
-      <a href="#"><img src="../../assets/icons/info (1).png" alt="info icon"></a>
+      <img style="cursor: pointer;" (click)="isPopupVisible=true;" src="../../assets/icons/info (1).png" alt="info icon">
       <a routerLink="/"><img src="../../assets/icons/home.png" alt="home icon"></a>
     </div>
   </nav>

@@ -3,11 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../langues/langues';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-camera',
   standalone: true,
-  imports: [RouterLink,ReactiveFormsModule,TranslateModule],
+  imports: [RouterLink,ReactiveFormsModule,TranslateModule,CommonModule],
   templateUrl: './add-camera.component.html',
   styleUrl: './add-camera.component.scss'
 })

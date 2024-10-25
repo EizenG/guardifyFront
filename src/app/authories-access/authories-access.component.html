@@ -1,0 +1,20 @@
+<div id="mainContainer">
+  <div id="cornerWhiteDiv"></div>
+  <nav>
+    <a href="#"><img src="../../assets/icons/autorisation.png" alt="authorisation icon"></a>
+    <a routerLink="/"><img src="../../assets/icons/home.png" alt="home icon"></a>
+  </nav>
+  <main>
+    <h1>Autoriser l'accès à la caméra</h1>
+    <form [formGroup]="cameraAMForm">
+      
+       
+      <div>
+        <button [disabled]="!cameraAMForm.valid" class="button-33" type="submit" role="button">{{
+          "addCameraPage.add_button" | translate }}</button>
+        <button [disabled]="!cameraAMForm.valid" class="button-33" type="button" role="button">{{
+          "addCameraPage.link_users" | translate }}</button>
+      </div>
+    </form>
+  </main>
+</div>

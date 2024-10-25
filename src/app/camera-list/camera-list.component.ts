@@ -45,6 +45,7 @@ export class CameraListComponent implements AfterViewInit,OnInit {
 
   page = 1;
   pageSize = 10;
+  isPopupVisible = false;
 
   //il faut limiter le champ location a 40 caracteres
   items : Camera[] = []

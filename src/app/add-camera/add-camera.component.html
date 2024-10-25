@@ -6,17 +6,20 @@
   </nav>
   <main>
     <h1>{{ "addCameraPage.add_camera" | translate }}</h1>
-    <form [formGroup] = "addCameraForm">
+    <form [formGroup]="addCameraForm">
       <div>
         <label for="id_camera"></label>
-        <input [placeholder]="'addCameraPage.add_camera' | translate" formControlName = "id_camera" type="text" name="id_camera" id="id_camera">
+        <input [ngStyle]="(addCameraForm.get('id_camera')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}" [placeholder]="'addCameraPage.camera_id' | translate" formControlName="id_camera" type="text"
+          name="id_camera" id="id_camera">
       </div>
 
       <div>
         <label for="localisation"></label>
-        <input [placeholder]="'addCameraPage.location' | translate " formControlName="localisation" type="text" name="localisation " id="localisation">
+        <input [ngStyle]="(addCameraForm.get('localisation')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
+          [placeholder]="'addCameraPage.location' | translate " formControlName="localisation" type="text"
+          name="localisation " id="localisation">
       </div>
-      
+
       <div>
         <div class="checkbox-wrapper-5">
           <div class="check">
@@ -27,8 +30,10 @@
         <p>{{ "addCameraPage.is_active" | translate }}</p>
       </div>
       <div>
-        <button class="button-33" type="submit" role="button">{{ "addCameraPage.add_button" | translate }}</button>
-        <button class="button-33" type="button" role="button">{{ "addCameraPage.link_users" | translate }}</button>
+        <button [disabled]="!addCameraForm.valid" class="button-33" type="submit" role="button">{{
+          "addCameraPage.add_button" | translate }}</button>
+        <button [disabled]="!addCameraForm.valid" class="button-33" type="button" role="button">{{
+          "addCameraPage.link_users" | translate }}</button>
       </div>
     </form>
   </main>
