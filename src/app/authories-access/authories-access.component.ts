@@ -1,27 +1,35 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslationService } from '../services/translation/translation.service';
-import { langues } from '../langues/langues';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { langues } from '../data/langues';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { permissionsValidators } from '../customValidators/permissions.validators';
 
 
 @Component({
   selector: 'app-authories-access',
   standalone: true,
-  imports: [TranslateModule,ReactiveFormsModule,RouterLink],
+  imports: [TranslateModule, ReactiveFormsModule, 
+    RouterLink, FormsModule,CommonModule
+  ],
   templateUrl: './authories-access.component.html',
   styleUrl: './authories-access.component.scss'
 })
 export class AuthoriesAccessComponent {
 
   cameraAMForm = this.fb.group({
-    email : ['',[Validators.email,Validators.required]],
-    permissions : ['',Validators.required]
-  });
+    email: ['', [Validators.email, Validators.required]],
+    modif: [false],
+    access : [false],
+    visio : [false],
+  },{validators:permissionsValidators()});
+
+
   translate = inject(TranslateService);
 
-  constructor(private fb : FormBuilder){
+  constructor(private fb: FormBuilder) {
     const langue = localStorage.getItem("langue");
     if (langue && langues.includes(langue)) {
       this.translate.setDefaultLang(langue);
@@ -29,4 +37,9 @@ export class AuthoriesAccessComponent {
       this.translate.setDefaultLang(langues[0]);
     }
   }
+
+  previousWindows() : void{
+    window.history.back();
+  }
+
 }

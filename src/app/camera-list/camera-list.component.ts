@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { RouterLink } from '@angular/router';
+import { dropdownListPermissions,dropdownSettingsPermissions } from '../data/permissionsDropdown';
 
 @Component({
   selector: 'app-camera-list',
@@ -13,14 +14,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })
-export class CameraListComponent implements AfterViewInit,OnInit {
+export class CameraListComponent implements AfterViewInit {
   @ViewChildren("getEltHeight") eltsBeforeList !: QueryList<ElementRef>;
 
-  dropdownListPermissions = [
-    { item_id: 1, item_text: "Modifier les paramètres"},
-    { item_id: 2, item_text: "Afficher le flux vidéo" },
-    { item_id: 3, item_text: "Voir les vidéos d'infractions" },
-  ];
+  
   dropdownListStatus = [
     { item_id: 1, item_text: "Actif" },
     { item_id: 2, item_text: "Inactif" },
@@ -28,14 +25,9 @@ export class CameraListComponent implements AfterViewInit,OnInit {
   dropdownBtnList !: NodeList;
   selectedItemsPermissions = [];
   selectedItemsStatus = "";
-  dropdownSettingsPermissions : IDropdownSettings = {
-    singleSelection : false,
-    enableCheckAll : true,
-    selectAllText : "Tout sélectionner",
-    unSelectAllText: "Tout désélectionner",
-    idField : "item_id",
-    textField: "item_text",
-  };
+  
+  dropdownSettingsPermissions = dropdownSettingsPermissions;
+  dropdownListPermissions = dropdownListPermissions;
 
   dropdownSettings2: IDropdownSettings = {
     singleSelection: true,
@@ -235,10 +227,6 @@ export class CameraListComponent implements AfterViewInit,OnInit {
     this.items = this.fakeData.slice(0, this.pageSize);
     this.cdref.detectChanges();
     this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
-  }
-
-  ngOnInit(): void {
-      
   }
 
 }

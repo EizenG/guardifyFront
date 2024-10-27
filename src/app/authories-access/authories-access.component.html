@@ -5,15 +5,36 @@
     <a routerLink="/"><img src="../../assets/icons/home.png" alt="home icon"></a>
   </nav>
   <main>
-    <h1>Autoriser l'accès à la caméra</h1>
-    <form [formGroup]="cameraAMForm">
-      
-       
+    <h1>{{ "accessManagement.title" | translate}}</h1>
+    <form  [formGroup]="cameraAMForm">
       <div>
-        <button [disabled]="!cameraAMForm.valid" class="button-33" type="submit" role="button">{{
-          "addCameraPage.add_button" | translate }}</button>
-        <button [disabled]="!cameraAMForm.valid" class="button-33" type="button" role="button">{{
-          "addCameraPage.link_users" | translate }}</button>
+        <label for="email"></label>
+        <input [ngStyle]="(cameraAMForm.get('email')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
+          [placeholder]="'accessManagement.userEmail' | translate" formControlName="email" type="text" name="email"
+          id="email">
+      </div>
+      <div id="multiselectContainer">
+        <h6
+        [ngStyle]="(cameraAMForm.hasError('permissionError'))?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
+        >{{ "accessManagement.permissions" | translate}}</h6>
+        <div>
+          <div class="form-group">
+            <input formControlName="modif" type="checkbox" name="modif" id="modif">
+            <label for="modif">{{ "accessManagement.permissionOptions.modifyDetails" | translate}}</label>
+          </div>
+          <div class="form-group">
+            <input formControlName="visio" type="checkbox" name="visio" id="visio">
+            <label for="visio">{{ "accessManagement.permissionOptions.viewVideoStream" | translate}}</label>
+          </div>
+          <div class="form-group">
+            <input formControlName="access" type="checkbox" name="access" id="access">
+            <label for="access">{{ "accessManagement.permissionOptions.accessViolationVideos" | translate}}</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button [disabled]="!cameraAMForm.valid" class="button-33" type="submit" role="button">{{ "accessManagement.buttons.submit" | translate}}</button>
+        <button class="button-33" type="button" (click)="previousWindows()" role="button">{{ "accessManagement.buttons.back" | translate}}</button>
       </div>
     </form>
   </main>

@@ -22,5 +22,19 @@
     "is_active": "Est actif",
     "add_button": "Ajouter",
     "link_users": "Lier des users"
+  },
+  "accessManagement":{
+    "title": "Autoriser l'accès à la caméra",
+    "userEmail": "Email de l'utilisateur",
+    "permissions": "Autorisations",
+    "permissionOptions": {
+      "modifyDetails": "Modifier les détails",
+      "viewVideoStream": "Visionner le flux vidéo",
+      "accessViolationVideos": "Accéder aux vidéos des infractions"
+    },
+    "buttons": {
+      "submit": "Valider et continuer",
+      "back": "Retour"
+    }
   }
 }

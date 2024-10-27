@@ -22,5 +22,19 @@
     "is_active": "Is active",
     "add_button": "Add",
     "link_users": "Link users"
+  },
+  "accessManagement": {
+    "title": "Authorize camera access",
+    "userEmail": "User email",
+    "permissions": "Permissions",
+    "permissionOptions": {
+      "modifyDetails": "Modify details",
+      "viewVideoStream": "View video stream",
+      "accessViolationVideos": "Access violation videos"
+    },
+    "buttons": {
+      "submit": "Validate and continue",
+      "back": "Back"
+    }
   }
 }

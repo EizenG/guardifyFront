@@ -8,16 +8,16 @@ import { Subject, Subscription, debounceTime, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslationService } from '../services/translation/translation.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { langues } from '../langues/langues';
+import { langues } from '../data/langues';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink,CommonModule,NgbAlert,TranslateModule],
+  imports: [RouterLink, CommonModule, NgbAlert, TranslateModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnDestroy,AfterViewInit {
+export class HomeComponent implements OnDestroy, AfterViewInit {
   @ViewChild("mainContainer") mainContainer !: ElementRef;
   @ViewChildren("h5Tag") h5Tags !: QueryList<ElementRef>;
   @ViewChild('selfClosingAlertError', { static: false }) selfClosingAlertError !: NgbAlert;
@@ -29,7 +29,7 @@ export class HomeComponent implements OnDestroy,AfterViewInit {
   firebaseService = inject(FirebaseService);
   router = inject(Router);
 
-  userUid : string | null = null;
+  userUid: string | null = null;
   errorMessage = '';
   successMessage = '';
   private _messageError$ = new Subject<string>();
@@ -40,18 +40,18 @@ export class HomeComponent implements OnDestroy,AfterViewInit {
   translate = inject(TranslateService);
   translationService = inject(TranslationService);
 
-  constructor(private cdref : ChangeDetectorRef){
+  constructor(private cdref: ChangeDetectorRef) {
     const langue = localStorage.getItem("langue");
-    if(langue && langues.includes(langue)){
+    if (langue && langues.includes(langue)) {
       this.translate.setDefaultLang(langue);
-    }else{
+    } else {
       this.translate.setDefaultLang(langues[0]);
     }
 
-    onAuthStateChanged(this.firebaseService.firebaseAuth, (user) =>{
-      if(user){
+    onAuthStateChanged(this.firebaseService.firebaseAuth, (user) => {
+      if (user) {
         this.userUid = user.email;
-      }else{
+      } else {
         this.userUid = null;
       }
       this.cdref.detectChanges();
@@ -81,36 +81,36 @@ export class HomeComponent implements OnDestroy,AfterViewInit {
     }
   }
   ngOnDestroy(): void {
-    if(this.errorMessageSubscription){
+    if (this.errorMessageSubscription) {
       this.errorMessageSubscription.unsubscribe();
     }
 
-    if(this.successMessageSubscription){
+    if (this.successMessageSubscription) {
       this.successMessageSubscription.unsubscribe();
     }
   }
 
-  expandMenu(){
+  expandMenu() {
     let nativeHtmlElt = (this.mainContainer.nativeElement as HTMLElement);
     nativeHtmlElt.classList.toggle("expandMenu");
-    this.h5Tags.forEach(item =>{
-      nativeHtmlElt.classList.contains("expandMenu") ? item.nativeElement.previousElementSibling.style.paddingLeft = "20px" : item.nativeElement.previousElementSibling.style.paddingLeft = "0"; 
+    this.h5Tags.forEach(item => {
+      nativeHtmlElt.classList.contains("expandMenu") ? item.nativeElement.previousElementSibling.style.paddingLeft = "20px" : item.nativeElement.previousElementSibling.style.paddingLeft = "0";
     });
     /*-----------------------------------*/
-    setTimeout(() =>{
+    setTimeout(() => {
       this.h5Tags.forEach(item => {
         (nativeHtmlElt.classList.contains("expandMenu")) ? (item.nativeElement as HTMLElement).style.opacity = "1" : (item.nativeElement as HTMLElement).style.opacity = "0";
         item.nativeElement.hidden = (nativeHtmlElt.classList.contains("expandMenu")) ? false : true;
       });
-       
-    },(nativeHtmlElt.classList.contains("expandMenu")?400:50));
+
+    }, (nativeHtmlElt.classList.contains("expandMenu") ? 400 : 50));
   }
 
-  handleLogin(){
+  handleLogin() {
     this.router.navigate(['/login-logout']);
   }
 
-  handleLogout(){
+  handleLogout() {
     this.firebaseService.signOut().subscribe(
       {
         next: () => {
@@ -131,15 +131,15 @@ export class HomeComponent implements OnDestroy,AfterViewInit {
     this._messageSuccess$.next(message);
   }
 
-  navigateTo(url : string){
+  navigateTo(url: string) {
     this.router.navigate([url]);
   }
 
-  changeLang(lang : string){
-    if(lang == 'en'){
+  changeLang(lang: string) {
+    if (lang == 'en') {
       this.ukFlagImg.nativeElement.style.display = "none";
       this.frFlagImg.nativeElement.style.display = "block";
-    }else if(lang == 'fr'){
+    } else if (lang == 'fr') {
       this.ukFlagImg.nativeElement.style.display = "block";
       this.frFlagImg.nativeElement.style.display = "none";
     }
