@@ -15,36 +15,36 @@
   </div>
   <nav>
     <div (click)="expandMenu()">
-      <i class="fa-solid fa-chevron-up" style="color:black;"></i>
+      <i class="fa-solid fa-chevron-up" style="color:white;"></i>
     </div>
     <hr>
     <div>
     <div>
       <div>
-        <a routerLink="/add-camera"><img src="../../assets/icons/add-photo.png" alt="icon add photo"></a>
+        <a routerLink="/add-camera"><img src="../../assets/icons/add-photo.svg" alt="icon add photo"></a>
         <h5 (click)="navigateTo('/add-camera')" hidden #h5Tag>{{"sidebar.add_camera" | translate }}</h5>
       </div>
       <div>
-        <a routerLink="/camera-list"><img src="../../assets/icons/notepad.png" alt="icon notepad"></a>
+        <a routerLink="/camera-list"><img src="../../assets/icons/notepad.svg" alt="icon notepad"></a>
         <h5 hidden #h5Tag (click)="navigateTo('/camera-list')">{{"sidebar.view_cameras" | translate }}</h5>
       </div>
       <div>
-        <a href=""><img src="../../assets/icons/playlist.png" alt="icon playlist"></a>
+        <a href=""><img src="../../assets/icons/playlist.svg" alt="icon playlist"></a>
         <h5 hidden #h5Tag>{{"sidebar.view_infractions" | translate }}</h5>
       </div>
       <div>
-        <a href=""><img src="../../assets/icons/criteria.png" alt="icon criteria"></a>
+        <a href=""><img src="../../assets/icons/criteria.svg" alt="icon criteria"></a>
         <h5 hidden #h5Tag>{{"sidebar.suspect_list" | translate }}</h5>
       </div>
       <div>
-        <a href=""><img src="../../assets/icons/adjust.png" alt="icon parameter"></a>
+        <a href=""><img src="../../assets/icons/adjust.svg" alt="icon parameter"></a>
         <h5 hidden #h5Tag>{{"sidebar.settings" | translate }}</h5>
       </div>
       </div>
       <div>
-        <button *ngIf="!userUid" (click)="handleLogin()" ><img src="../../assets/icons/login.png" alt="icon login"></button>
-        <button *ngIf="userUid" (click)="handleLogout()"><img src="../../assets/icons/logout.png" alt="icon login"></button>
-        <h5 (click)="handleLogout()" #h5Tag> {{ (userUid)?("sidebar.logout" | translate ):("sidebar.login" | translate) }}</h5>
+        <button *ngIf="!userUid" (click)="handleLogin()" ><img src="../../assets/icons/login.svg" alt="icon login"></button>
+        <button *ngIf="userUid" (click)="handleLogoutOrGoToSignIn()"><img src="../../assets/icons/logout.svg" alt="icon login"></button>
+        <h5 [ngStyle]="(userUid)?{'color':'#FF4136'}:{'color':'white'}" (click)="handleLogoutOrGoToSignIn()" #h5Tag> {{ (userUid)?("sidebar.logout" | translate ):("sidebar.login" | translate) }}</h5>
       </div>
     </div>
   </nav>

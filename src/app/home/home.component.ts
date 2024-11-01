@@ -110,17 +110,21 @@ export class HomeComponent implements OnDestroy, AfterViewInit {
     this.router.navigate(['/login-logout']);
   }
 
-  handleLogout() {
-    this.firebaseService.signOut().subscribe(
-      {
-        next: () => {
-          this.changeSuccessMessage('Vous êtes désormais déconnecté');
-        },
-        error: () => {
-          this.changeSuccessMessage('Attention une erreur est survenue !!!');
+  handleLogoutOrGoToSignIn() {
+    if(this.userUid){
+      this.firebaseService.signOut().subscribe(
+        {
+          next: () => {
+            this.changeSuccessMessage('Vous êtes désormais déconnecté');
+          },
+          error: () => {
+            this.changeSuccessMessage('Attention une erreur est survenue !!!');
+          }
         }
-      }
-    )
+      );
+    }else{
+      this.handleLogin();
+    }
   }
 
   changeErrorMessage(message: string) {

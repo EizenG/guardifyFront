@@ -2,12 +2,16 @@
 @import "../../mediaQueries";
 
 #mainContainer {
-  background-image: url('../../assets/Sprinkle.svg');
+  background-image: url('../../assets/background.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #cornerWhiteDiv{
   top: -55px;
   left: -45px;
+  background-color: $secondary-background;
 }
 
 nav {
@@ -52,7 +56,7 @@ main{
   justify-content: center;
 
   h1 {
-    color: white;
+    color: $accent;
     text-align: center;
   }
 

@@ -1,22 +1,26 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
 import { Camera } from '../customType/camera';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { dropdownListPermissions,dropdownSettingsPermissions } from '../data/permissionsDropdown';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { langues } from '../data/langues';
+import { onAuthStateChanged } from '@angular/fire/auth';
+import { FirebaseService } from '../services/firebaseService/firebase.service';
 
 @Component({
   selector: 'app-camera-list',
   standalone: true,
-  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination,RouterLink],
+  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination,RouterLink,TranslateModule],
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })
 export class CameraListComponent implements AfterViewInit {
   @ViewChildren("getEltHeight") eltsBeforeList !: QueryList<ElementRef>;
-
+  @ViewChild("notData") noDataDivElt !: HTMLDivElement;
   
   dropdownListStatus = [
     { item_id: 1, item_text: "Actif" },
@@ -38,9 +42,19 @@ export class CameraListComponent implements AfterViewInit {
   page = 1;
   pageSize = 10;
   isPopupVisible = false;
+  userUID : string | null = null;
 
   //il faut limiter le champ location a 40 caracteres
   items : Camera[] = []
+  cameraData : Camera[] = [
+    {
+      "id_camera": "47392",
+      "location": "Auchan Dakar Sud",
+      "permissions": [2, 4],
+      "status": true,
+      "isOwner": true
+    }
+  ];
   fakeData: Camera[] = [
     {
       "id_camera": "47392",
@@ -149,7 +163,29 @@ export class CameraListComponent implements AfterViewInit {
     }
   ]
 
-  constructor(private cdref: ChangeDetectorRef){}
+  translate = inject(TranslateService);
+  firebaseService = inject(FirebaseService);
+  router = inject(Router);
+
+
+  constructor(private cdref: ChangeDetectorRef){
+    const langue = localStorage.getItem("langue");
+    if (langue && langues.includes(langue)) {
+      this.translate.setDefaultLang(langue);
+    } else {
+      this.translate.setDefaultLang(langues[0]);
+    }
+    onAuthStateChanged(this.firebaseService.firebaseAuth,(user)=>{
+      if(user){
+        this.userUID = user.uid;
+      }else{
+        this.userUID = null;
+        alert("Not login")
+        this.router.navigate(["./","login-logout"]);
+      }
+    });
+    
+  }
   
   onItemSelectStatus(item: any) {
     let children: HTMLCollection;

@@ -4,7 +4,20 @@ $base-color:$secondary-background; /*me*/
 $disable-background-color: #eceeef;
 
 .dropdown-multiselect__caret:before{
-  border-color: white transparent!important;/*me*/
+  border-color: $accent transparent!important;/*me*/
+}
+
+.multiselect-item-checkbox{
+
+  input{
+    + div:before{
+      border: 2px solid $secondary-background!important;
+    }
+
+    &:checked + div:before{
+      background-color: $secondary-background!important;
+    }
+  }
 }
 
 .selected-item-container{
@@ -16,11 +29,11 @@ $disable-background-color: #eceeef;
   margin-inline: auto;
   
   .dropdown-btn {
-    border: 1px solid $primary-background!important; /*me*/
+    border: 1px solid $accent!important; /*me*/
     height: 38.45px!important;/*me*/
     .selected-item {
       display: none!important;//
-      background: $primary-background!important;/*me*/
+      background: $accent!important;/*me*/
       /*me*/
       display: flex;
       flex-wrap: wrap;
@@ -35,7 +48,7 @@ $disable-background-color: #eceeef;
     }
 
     span {
-      color: white !important;/*me*/
+      color: $accent !important;/*me*/
       font-weight: bold;/*me*/
     }
   }

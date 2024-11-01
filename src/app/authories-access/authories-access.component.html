@@ -1,8 +1,8 @@
 <div id="mainContainer">
   <div id="cornerWhiteDiv"></div>
   <nav>
-    <a href="#"><img src="../../assets/icons/autorisation.png" alt="authorisation icon"></a>
-    <a routerLink="/"><img src="../../assets/icons/home.png" alt="home icon"></a>
+    <a href="#"><img src="../../assets/icons/autorisation.svg" alt="authorisation icon"></a>
+    <a routerLink="/"><img src="../../assets/icons/home.svg" alt="home icon"></a>
   </nav>
   <main>
     <h1>{{ "accessManagement.title" | translate}}</h1>
@@ -17,7 +17,7 @@
         <h6
         [ngStyle]="(cameraAMForm.hasError('permissionError'))?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
         >{{ "accessManagement.permissions" | translate}}</h6>
-        <div>
+        <div  [ngStyle]="(cameraAMForm.hasError('permissionError'))?{'border':'2px solid rgb(255,204,203)'}:{}">
           <div class="form-group">
             <input formControlName="modif" type="checkbox" name="modif" id="modif">
             <label for="modif">{{ "accessManagement.permissionOptions.modifyDetails" | translate}}</label>

@@ -36,5 +36,20 @@
       "submit": "Validate and continue",
       "back": "Back"
     }
+  },
+  "cameraListPage" : {
+    "permissions": "Permissions",
+    "modify_camera_details": "Modify camera details",
+    "view_camera_feed": "View camera video feed",
+    "access_camera_infractions": "Access to camera infraction videos",
+    "other": "Other",
+    "you_are_owner": "You are the owner of the camera.",
+    "access_granted": "Access to the camera has been granted to you.",
+    "camera_list": "Camera List",
+    "location_filter": "Filter by location or ID",
+    "status": "Status",
+    "camera_id": "ID",
+    "location": "Location",
+    "permissions_code": "Permissions: "
   }
 }
