@@ -20,7 +20,7 @@ import { FirebaseService } from '../services/firebaseService/firebase.service';
 })
 export class CameraListComponent implements AfterViewInit {
   @ViewChildren("getEltHeight") eltsBeforeList !: QueryList<ElementRef>;
-  @ViewChild("notData") noDataDivElt !: HTMLDivElement;
+  @ViewChild("noData") noDataImgElt !: ElementRef<HTMLImageElement>;
   
   dropdownListStatus = [
     { item_id: 1, item_text: "Actif" },
@@ -259,6 +259,8 @@ export class CameraListComponent implements AfterViewInit {
     }else if(window.innerWidth > 830){
       this.pageSize *= 2;
     }
+
+    this.noDataImgElt.nativeElement.style.height = `${window.innerHeight - totalHeight - 100}px`;
     
     this.items = this.fakeData.slice(0, this.pageSize);
     this.cdref.detectChanges();

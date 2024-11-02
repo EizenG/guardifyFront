@@ -50,8 +50,8 @@
             (onSelectAll)="onSelectAllPermissions($event)">
       </ng-multiselect-dropdown>
     </div>
-    <div [ngStyle]="(cameraData.length > 0)?{'display': 'none'}:{'display': 'flex'}" id="noData" #noData>
-
+    <div [ngStyle]="(cameraData.length > 0)?{'display': 'none'}:{'display': 'flex'}" id="noData">
+      <img src="../../assets/icons/10189052.svg" alt="icon representing no data found" #noData>
     </div>
     <div [ngStyle]="(cameraData.length == 0)?{'display': 'none'}:{'display': 'grid'}" id="cameraList" #cameraList>
 
@@ -60,6 +60,12 @@
           <div>
             <img [ngStyle]="(item.isOwner)?{'width': '73px','height': '90px'}:{'width': '70px','height': '70px','margin-top': '10px'}" [src]="(item.isOwner)?'../../assets/icons/ownership1.svg':'../../assets/icons/ownership2.svg'" alt="icon ownership">
           </div>
+        </div>
+
+        <div class="optionOnHover">
+          <img [ngStyle]="(item.permissions.includes(2))?{'opacity':1,'cursor':'pointer'}:{'opacity':0.5,'cursor':'not-allowed'}" src="../../assets/icons/media.svg" alt="media icon">
+          <img src="../../assets/icons/bin.svg" alt="trash icon">
+          <img src="../../assets/icons/adjust1.svg" alt="param icon">
         </div>
 
         <div> 
@@ -71,10 +77,12 @@
         </div>
       </div>
     </div>
-    <div style="width: 100%;">
+    <div [ngStyle]="(cameraData.length == 0)?{'display': 'none'}:{'display': 'block'}" style="width: 100%;">
       <ngb-pagination [collectionSize]="fakeData.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"
         [maxSize]="2" aria-label="Pagination" class="mt-3 d-flex justify-content-center"
-        (pageChange)="loadPageData($event)"></ngb-pagination>
+        (pageChange)="loadPageData($event)"
+        >
+      </ngb-pagination>
     </div>
     
   </main>
