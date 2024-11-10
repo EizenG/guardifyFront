@@ -5,49 +5,61 @@
 @import 'mediaQueries';
 
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: agdasima,sans-serif;
+  font-family: agdasima, sans-serif;
   font-size: $mobile-body-text-size;
   color: $accent;
+
   @include mediaMinWidth(1024px) {
-      font-size: $desktop-body-text-size;
-    }
+    font-size: $desktop-body-text-size;
+  }
 }
 
 
-h1,h2,h3,h4{
-  font-family: Oswald,sans-serif;
+h1,
+h2,
+h3,
+h4 {
+  font-family: Oswald, sans-serif;
 }
 
-h1{
+h1 {
   font-size: $mobile-h1-text-size;
+
   @include mediaMinWidth(1024px) {
-     font-size: $desktop-h1-text-size;
-    }
+    font-size: $desktop-h1-text-size;
+  }
 }
 
 h2 {
   font-size: $mobile-h2-text-size;
+
   @include mediaMinWidth(1024px) {
-      font-size: $desktop-h2-text-size;
-    }
+    font-size: $desktop-h2-text-size;
+  }
 }
 
 h3 {
   font-size: $mobile-h3-text-size;
+
   @include mediaMinWidth(1024px) {
-      font-size: $desktop-h3-text-size;
-    }
+    font-size: $desktop-h3-text-size;
+  }
 }
 
-body{
+body {
   width: 100vw;
-  max-width: 100%;
-  height: 100vh;
-  max-height: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: $primary-background;
+  // background-image: url('assets/background.svg');
+  // background-position: center center;
+  // background-repeat: repeat-y;
+  // background-size: cover;
 }
 
 #cornerWhiteDiv {
@@ -64,11 +76,9 @@ body{
   }
 }
 
-#mainContainer{
+#mainContainer {
   position: relative;
-  overflow: hidden;
   width: 100%;
-  height: 100%;
 }
 
 #OperationResultInf {
@@ -120,7 +130,7 @@ body{
   height: calc(.8 * var(--size));
   top: calc(.1 * var(--size));
   left: calc(.1 * var(--size));
-  background: linear-gradient(90deg,$secondary-background,$primary-background);
+  background: linear-gradient(90deg, $secondary-background, $primary-background);
   box-shadow: 0 6px 7px rgba(0, 0, 0, 0.3);
   outline: none;
   margin: 0;
@@ -213,6 +223,136 @@ body{
     rgba(240, 153, 181, 0.25) 0 8px 16px,
     rgba(240, 153, 181, 0.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
+}
+
+// Menu
+
+.bg-menu,
+.offcanvas-header,
+.offcanvas-body {
+  background-color: $secondary-background;
+}
+
+// menu close btn
+.menuCloseBtn {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  color: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  right: 0px;
+  letter-spacing: 1.5px;
+  line-height: 90px;
+  outline: none;
+  overflow: hidden;
+  padding: 10px 0 0;
+  position: absolute;
+  text-transform: uppercase;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease-in;
+  width: 40px;
+}
+
+.menuCloseBtn::before,
+.menuCloseBtn::after {
+  background-color: white;
+  content: '';
+  display: block;
+  height: 3px;
+  left: 0;
+  position: absolute;
+  transform-origin: center left;
+  transition: all 0.2s ease-in;
+  width: 40px;
+  z-index: -1;
+}
+
+.menuCloseBtn::before {
+  top: 38px;
+  transform: rotate(45deg);
+}
+
+.menuCloseBtn::after {
+  bottom: 30px;
+  transform: rotate(-45deg);
+}
+
+.menuCloseBtn:hover {
+  color: #8A2387;
+}
+
+.menuCloseBtn:hover::before,
+.menuCloseBtn:hover::after {
+  height: 20px;
+  transform: rotate(0deg);
+}
+
+//fin
+
+.offcanvas-header {
+  position: relative;
+  padding: 20px 0px 0px !important;
+  height: 50px !important;
+}
+
+.offcanvas {
+  background-color: $secondary-background !important;
+}
+
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  hr {
+    border: 1px solid white;
+    width: 100%;
+    margin: 0 auto 50px;
+    opacity: 1;
+  }
+
+  >div:first-child {
+
+    div {
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      margin-top: 30px;
+      color: white;
+    }
+
+    h5 {
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+  }
+
+  >div:last-child {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+
+    h5 {
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+
+    button {
+      background: transparent;
+      border: none;
+    }
+  }
+
+  img {
+    width: 42px;
+    height: 42px;
+  }
+
+  i {
+    font-size: 36px;
+  }
 }
 
 

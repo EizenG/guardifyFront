@@ -1,6 +1,6 @@
-<div id="popupLayer" [ngStyle]="{'display' : (isPopupVisible)?'flex':'none'}">
-  <div id="popup">
-    <div><i (click)="isPopupVisible = false;" style="color:#9799FB;" class="fa-solid fa-xmark"></i></div>
+<div class="popupLayer" [ngStyle]="{'display' : (isPopupInfVisible)?'flex':'none'}">
+  <div class="popup">
+    <div><i (click)="isPopupInfVisible = false;" style="color:#9799FB;" class="fa-solid fa-xmark"></i></div>
     <div>
       <h4>{{"cameraListPage.permissions" | translate}}</h4>
       <ol>
@@ -16,12 +16,25 @@
     </div>
   </div>
 </div>
+
+<div class="popupLayer" [ngStyle]="{'display' : (isPopupRestrictionVisible)?'flex':'none'}">
+  <div class="popup">
+    <div><i (click)="isPopupRestrictionVisible = false;" style="color:#9799FB;" class="fa-solid fa-xmark"></i></div>
+    <div>
+      <img class="restrictionImg" src="../../assets/icons/restriction.svg" alt="icon restriction">
+      <p>
+        Attention : cette caméra est associée à au moins une vidéo d'infraction et ne peut donc pas être supprimée.
+      </p>
+    </div>
+  </div>
+</div>
+
 <div id="mainContainer">
   <div id="cornerWhiteDiv"></div>
   <nav #getEltHeight>
     <a href="#"><img src="../../assets/icons/notepad.svg" alt="notepad icon"></a>
     <div>
-      <img style="cursor: pointer;" (click)="isPopupVisible=true;" src="../../assets/icons/info (1).svg" alt="info icon">
+      <img style="cursor: pointer;" (click)="isPopupInfVisible=true;" src="../../assets/icons/info (1).svg" alt="info icon">
       <a routerLink="/"><img src="../../assets/icons/home.svg" alt="home icon"></a>
     </div>
   </nav>
@@ -63,9 +76,17 @@
         </div>
 
         <div class="optionOnHover">
-          <img [ngStyle]="(item.permissions.includes(2))?{'opacity':1,'cursor':'pointer'}:{'opacity':0.5,'cursor':'not-allowed'}" src="../../assets/icons/media.svg" alt="media icon">
-          <img src="../../assets/icons/bin.svg" alt="trash icon">
-          <img src="../../assets/icons/adjust1.svg" alt="param icon">
+          <button (click)="navigateToCameraStream()" [disabled]="(item.permissions.includes(2))?false:true" type="button" role="button">
+            <img [ngStyle]="(item.permissions.includes(2))?{'opacity':1,'cursor':'pointer'}:{'opacity':0.5,'cursor':'not-allowed'}"
+              src="../../assets/icons/media.svg" alt="media icon">
+          </button>
+          
+          <button (click)="deleteCamera()" type="button" role="button">
+            <img src="../../assets/icons/bin.svg" alt="trash icon">
+          </button>
+          <button type="button" role="button">
+            <img src="../../assets/icons/adjust1.svg" alt="param icon">
+          </button>
         </div>
 
         <div> 

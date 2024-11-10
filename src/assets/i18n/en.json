@@ -12,7 +12,57 @@
     "welcome": "Welcome to Guardify",
     "description_1": "The security of your space is our priority. With our advanced surveillance system, you can monitor your premises in real time, easily access recordings, and receive instant alerts in case of suspicious activity.",
     "description_2": "With Guardify, keep an eye on what matters, wherever you are. Configure your cameras, manage access, and ensure that every critical moment is captured and saved.",
-    "description_3": "Take control of your security today."
+    "description_3": "Take control of your security today.",
+    "firstSection": {
+      "title": "A surveillance platform that makes your business security",
+      "description": {
+        "simple": "Simple",
+        "safe": "Safe",
+        "intelligent": "Intelligent"
+      }
+    },
+    "secondSection": {
+      "title1": "Manage and protect surveillance recordings",
+      "title1Suite" : "with an easy-to-use digital platform",
+      "uploadDescription": "Upload Recordings. Simplify record collection and eliminate constraints of DVDs and external hard drives. Security operators and other partners can quickly upload recording files for a more secure and efficient management process.",
+      "benefits": {
+        "timeSaving": "Save time and reduce record management costs",
+        "standardize": "Standardize procedures"
+      }
+    },
+    "thirdSection": {
+      "features": [
+        {
+          "description": "Feature to add a new camera to the surveillance system. Users can configure camera settings and associate it with specific areas.",
+          "title": "Add a camera"
+        },
+        {
+          "description": "List of all installed cameras, with the ability to view live feeds, check the status of each camera, and manage their settings.",
+          "title": "View cameras"
+        },
+        {
+          "description": "Access to video recordings associated with events detected as infractions. This feature allows reviewing videos to analyze and identify incidents.",
+          "title": "View infraction videos"
+        },
+        {
+          "description": "Displays a list of individuals identified as suspects in infraction videos. Users can see detailed information on each suspect and track their history in the system.",
+          "title": "Suspect list"
+        }
+      ]
+    },
+    "fourthSection": {
+      "contactUs": "Contact us",
+      "form": {
+        "nameLabel": "Name",
+        "emailLabel": "Email",
+        "telLabel": "Phone",
+        "messageLabel": "Message",
+        "submitButton": "Send"
+      }
+    },
+    "lastSection": {
+      "footer": "© 2024 GUARDIFY. All rights reserved."
+    }
   },
 
   "addCameraPage": {
@@ -38,6 +88,8 @@
     }
   },
   "cameraListPage" : {
+    "close" : "close",
+    "home" : "Home",
     "permissions": "Permissions",
     "modify_camera_details": "Modify camera details",
     "view_camera_feed": "View camera video feed",

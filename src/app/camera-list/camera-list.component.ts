@@ -41,7 +41,8 @@ export class CameraListComponent implements AfterViewInit {
 
   page = 1;
   pageSize = 10;
-  isPopupVisible = false;
+  isPopupInfVisible = false;
+  isPopupRestrictionVisible = false;
   userUID : string | null = null;
 
   //il faut limiter le champ location a 40 caracteres
@@ -265,6 +266,14 @@ export class CameraListComponent implements AfterViewInit {
     this.items = this.fakeData.slice(0, this.pageSize);
     this.cdref.detectChanges();
     this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
+  }
+
+  deleteCamera():void{
+    this.isPopupRestrictionVisible = true;
+  }
+
+  navigateToCameraStream() : void{
+    this.router.navigate(['/stream']);
   }
 
 }

@@ -1,5 +1,7 @@
 {
   "sidebar": {
+    "close" : "fermer",
+    "home" : "Accueil",
     "add_camera": "Ajouter une caméra",
     "view_cameras": "Afficher les caméras",
     "view_infractions": "Afficher les vidéos infractions",
@@ -12,7 +14,56 @@
     "welcome": "Bienvenue sur Guardify",
     "description_1": "La sécurité de votre espace est notre priorité. Grâce à notre système avancé de vidéosurveillance, vous pouvez surveiller vos locaux en temps réel, accéder facilement aux enregistrements, et recevoir des alertes instantanées en cas d'activité suspecte.",
     "description_2": "Avec Guardify gardez un œil sur ce qui compte, où que vous soyez. Configurez vos caméras, gérez les accès, et assurez-vous que chaque instant critique est capturé et sauvegardé.",
-    "description_3": "Prenez le contrôle de votre sécurité dès aujourd'hui."
+    "description_3": "Prenez le contrôle de votre sécurité dès aujourd'hui.",
+    "firstSection": {
+      "title": "Une plateforme de vidéosurveillance qui rend la sécurité de votre commerce",
+      "description": {
+        "simple": "Simple",
+        "safe": "Sûre",
+        "intelligent": "Intelligente"
+      }
+  },
+  "secondSection": {
+    "title1": "Gérez et protégez les enregistrements de surveillance",
+    "title1Suite": "avec une plateforme numérique facile à utiliser",
+    "uploadDescription": "Téléchargez les Enregistrements. Simplifiez la collecte des enregistrements et éliminez les contraintes liées aux DVD et aux disques durs externes. Les opérateurs de sécurité et autres partenaires peuvent rapidement télécharger les fichiers d'enregistrement pour un processus de gestion plus sécurisé et efficace.",
+    "benefits": {
+      "timeSaving": "Gagnez du temps et réduisez les coûts liés à la gestion des enregistrements",
+      "standardize": "Standardisez les procédures"
+    }
+  },
+  "thirdSection": {
+    "features": [
+      {
+        "description": "Fonctionnalité permettant d'ajouter une nouvelle caméra au système de surveillance. Les utilisateurs peuvent configurer les paramètres de la caméra et l'associer à des zones spécifiques.",
+        "title": "Ajouter une caméra"
+      },
+      {
+        "description": "Liste de toutes les caméras installées, avec la possibilité de visualiser les flux en direct, de vérifier l'état de chaque caméra et de gérer leur configuration.",
+        "title": "Afficher les caméras"
+      },
+      {
+        "description": "Accès aux enregistrements vidéo associés aux événements détectés comme des infractions. Cette fonctionnalité permet de revoir les vidéos pour analyser et identifier les incidents.",
+        "title": "Afficher les vidéos d'infractions"
+      },
+      {
+        "description": "Affichage d'une liste des individus identifiés comme suspects dans les vidéos d'infractions. Les utilisateurs peuvent voir des informations détaillées sur chaque suspect et suivre leur historique dans le système.",
+        "title": "Liste des suspects"
+      }
+    ]
+  },
+  "fourthSection": {
+    "contactUs": "Contactez nous",
+    "form": {
+      "nameLabel": "Nom",
+      "emailLabel": "Email",
+      "telLabel": "Téléphone",
+      "messageLabel": "Message",
+      "submitButton": "Envoyer"
+    }
+  },
+  "lastSection": {
+    "footer": "© 2024 GUARDIFY. Tous droits réservés."
   },
 
   "addCameraPage" : {
@@ -51,5 +102,6 @@
     "camera_id": "ID",
     "location": "Localisation",
     "permissions_code": "Permissions : "
+  }
   }
 }

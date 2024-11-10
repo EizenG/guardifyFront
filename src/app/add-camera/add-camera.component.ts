@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
 import { CommonModule } from '@angular/common';
@@ -21,6 +21,7 @@ export class AddCameraComponent {
   });
 
   translate = inject(TranslateService);
+  router = inject(Router);
 
   constructor(private fb: FormBuilder, private cdref: ChangeDetectorRef) {
     const langue = localStorage.getItem("langue");
@@ -39,6 +40,10 @@ export class AddCameraComponent {
 
   test() {
     console.log(this.addCameraForm.get('status')?.value)
+  }
+
+  linkUsers() : void{
+    this.router.navigate(['./','authories-user']);
   }
 
 }

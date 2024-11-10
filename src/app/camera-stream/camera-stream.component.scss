@@ -1,0 +1,111 @@
+@import "../../variables";
+@import "../../mediaQueries";
+
+#mainContainer {
+  background-image: url('../../assets/background.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .stream{
+    background-color: rebeccapurple;
+    width: 90vw;
+    height: min(400px,80vh);
+    margin-inline: auto;
+    border-radius: 10px;
+    @include mediaMinWidth($width-cameraListPage-breakpoint2){
+      height: 500px;
+      width: 800px;
+    }
+  }
+}
+
+#cornerWhiteDiv {
+  top: -55px;
+  left: -45px;
+  background-color: $secondary-background;
+}
+
+nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  >a:first-child {
+    @include mediaMinWidth($width-cameraListPage-breakpoint2) {
+      display: none;
+    }
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+
+    @include mediaMinWidth($width-cameraListPage-breakpoint2) {
+      width: 70px;
+      height: 70px;
+    }
+  }
+}
+
+#buttons{
+
+  width: 90vw;
+  margin-inline: auto;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
+      width: 800px;
+    }
+
+  .recButton{
+    border: none;
+    background: transparent;
+  }
+
+  .retourBtn{
+    height: 50px;
+  }
+
+  img{
+    width: 50px;
+    height: 50px;
+  }
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: calc(100vh - 80px);
+  @include mediaMinWidth($width-cameraListPage-breakpoint2){
+    height: calc(100vh - 110px);
+  }
+
+  h1{
+    text-align: center;
+    margin: 20px 0 10px;
+  }
+
+  p{
+    width: 90vw;
+    margin-inline: auto;
+    margin: 10px auto 20px;
+    padding-left: 10px;
+
+    @include mediaMinWidth($width-cameraListPage-breakpoint2){
+      width: 800px;
+    }
+  }
+}

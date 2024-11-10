@@ -32,7 +32,7 @@
       <div>
         <button [disabled]="!addCameraForm.valid" class="button-33" type="submit" role="button">{{
           "addCameraPage.add_button" | translate }}</button>
-        <button [disabled]="!addCameraForm.valid" class="button-33" type="button" role="button">{{
+        <button (click)="linkUsers()" [disabled]="!addCameraForm.valid" class="button-33" type="button" role="button">{{
           "addCameraPage.link_users" | translate }}</button>
       </div>
     </form>
