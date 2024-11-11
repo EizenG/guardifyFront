@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, TemplateRef, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, TemplateRef, ViewChild, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
 import { Router, RouterLink} from '@angular/router';
@@ -33,6 +33,7 @@ export class NavbarComponent {
   errorMessageSubscription: Subscription | null = null;
   successMessageSubscription: Subscription | null = null;
   userUid : string | null = null;
+  currentActiveMenuItem !: HTMLDivElement;
 
   constructor(){
     const langue = localStorage.getItem("langue");
@@ -68,6 +69,10 @@ export class NavbarComponent {
       .subscribe(() => this.selfClosingAlertSuccess?.close());
 
 
+  }
+
+  isActiveUrl(url : string): boolean{
+    return this.router.url === url;
   }
 
   navigateTo(url: string) : void {

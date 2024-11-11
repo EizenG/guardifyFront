@@ -9,3 +9,9 @@
     @content;
   }
 }
+
+@mixin mediaMinHeight($minHeight){
+  @media screen and (min-height:$minHeight) {
+      @content;
+  }
+}

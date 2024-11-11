@@ -1,4 +1,27 @@
 {
+  "addCameraPage": {
+    "add_camera": "Ajouter une caméra ",
+    "camera_id": "Id caméra",
+    "location": "Localisation : Auchan-Mbour-Entre",
+    "is_active": "Est actif",
+    "add_button": "Ajouter",
+    "link_users": "Lier des users"
+  },
+  "cameraListPage": {
+    "permissions": "Permissions",
+    "modify_camera_details": "Modifier les détails de la caméra",
+    "view_camera_feed": "Visualiser le flux vidéo de la caméra",
+    "access_camera_infractions": "Accès aux vidéos d'infractions de la caméra",
+    "other": "Autres",
+    "you_are_owner": "Vous êtes le propriétaire de la caméra.",
+    "access_granted": "L'accès à la caméra vous a été octroyé.",
+    "camera_list": "Liste des caméras",
+    "location_filter": "Filtrer par localisation ou ID",
+    "status": "Statut",
+    "camera_id": "ID",
+    "location": "Localisation",
+    "permissions_code": "Permissions : "
+  },
   "sidebar": {
     "close" : "fermer",
     "home" : "Accueil",
@@ -65,15 +88,6 @@
   "lastSection": {
     "footer": "© 2024 GUARDIFY. Tous droits réservés."
   },
-
-  "addCameraPage" : {
-    "add_camera": "Ajouter une camera",
-    "camera_id": "Identifiant de la camera",
-    "location": "Localisation : Auchan-Mbour-Entre",
-    "is_active": "Est actif",
-    "add_button": "Ajouter",
-    "link_users": "Lier des users"
-  },
   "accessManagement":{
     "title": "Autoriser l'accès à la caméra",
     "userEmail": "Email de l'utilisateur",
@@ -87,21 +101,6 @@
       "submit": "Valider et continuer",
       "back": "Retour"
     }
-  },
-  "cameraListPage": {
-    "permissions": "Permissions",
-    "modify_camera_details": "Modifier les détails de la caméra",
-    "view_camera_feed": "Visualiser le flux vidéo de la caméra",
-    "access_camera_infractions": "Accès aux vidéos d'infractions de la caméra",
-    "other": "Autres",
-    "you_are_owner": "Vous êtes le propriétaire de la caméra.",
-    "access_granted": "L'accès à la caméra vous a été octroyé.",
-    "camera_list": "Liste des caméras",
-    "location_filter": "Filtrer par localisation ou ID",
-    "status": "Statut",
-    "camera_id": "ID",
-    "location": "Localisation",
-    "permissions_code": "Permissions : "
   }
   }
 }

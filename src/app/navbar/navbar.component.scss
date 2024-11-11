@@ -20,6 +20,27 @@
   }
 }
 
+.isActive{
+  position: relative;
+  left: 0;
+  background-color: $secondary-background;
+  box-shadow: white 0px 30px 60px -12px inset, white 0px 18px 36px -18px inset;
+  width: 100%;
+}
+
+.offcanvas-body{
+  padding-inline: 0!important;
+
+  >div div{
+    padding: 10px 20px;
+  }
+
+  >div:last-child{
+    padding: 10px 20px;
+  }
+}
+
+
 // Menu icon
 
 .menuIcon {
