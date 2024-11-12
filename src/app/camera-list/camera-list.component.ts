@@ -14,7 +14,7 @@ import { FirebaseService } from '../services/firebaseService/firebase.service';
 @Component({
   selector: 'app-camera-list',
   standalone: true,
-  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination,RouterLink,TranslateModule],
+  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination,TranslateModule],
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })
@@ -250,6 +250,7 @@ export class CameraListComponent implements AfterViewInit {
       totalHeight += parseFloat(computedStyle['marginTop']);
       totalHeight += parseFloat(computedStyle['marginBottom']);
     });
+    totalHeight += 80;
     if ((window.innerHeight - totalHeight) > 0)
       this.pageSize = Math.trunc((window.innerHeight - totalHeight) / 100) - 1;
     else

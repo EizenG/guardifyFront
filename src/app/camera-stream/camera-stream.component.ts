@@ -21,4 +21,8 @@ export class CameraStreamComponent {
       this.translate.setDefaultLang(langues[0]);
     }
   }
+
+  previousWindows(): void{
+    window.history.back();
+  }
 }

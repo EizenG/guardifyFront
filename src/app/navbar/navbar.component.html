@@ -58,9 +58,9 @@
         <a href="" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/criteria.svg" alt="icon criteria"></a>
         <h5 #h5Tag>{{"sidebar.suspect_list" | translate }}</h5>
       </div>
-      <div [ngClass]="{'isActive': isActiveUrl('/x')}">
-        <a href="" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/adjust.svg" alt="icon parameter"></a>
-        <h5 #h5Tag>{{"sidebar.settings" | translate }}</h5>
+      <div [ngClass]="{'isActive': isActiveUrl('/parameter')}">
+        <a routerLink="/parameter" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/adjust.svg" alt="icon parameter"></a>
+        <h5 (click)="navigateTo('/parameter');offcanvas.dismiss('Cross click')" #h5Tag>{{"sidebar.settings" | translate }}</h5>
       </div>
     </div>
 

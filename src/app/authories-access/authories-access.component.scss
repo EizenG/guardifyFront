@@ -9,52 +9,10 @@
   background-size: cover;
 }
 
-#cornerWhiteDiv {
-  top: -55px;
-  left: -45px;
-  background-color: $secondary-background;
-}
-
-nav {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-
-  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-    height: 100px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  >a:first-child {
-    @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-      display: none;
-    }
-  }
-
-  img {
-    width: 50px;
-    height: 50px;
-
-    @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-      width: 70px;
-      height: 70px;
-    }
-  }
-}
-
 main {
-
-  margin-top: 10px;
-  height: calc(100vh - 80px);
-
-  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-    height: calc(100vh - 110px);
-  }
-  
-
+  height: calc(100vh - 80px); 
+  min-height: max-content;
+  padding-block: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;

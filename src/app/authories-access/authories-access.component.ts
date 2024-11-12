@@ -11,8 +11,7 @@ import { permissionsValidators } from '../customValidators/permissions.validator
 @Component({
   selector: 'app-authories-access',
   standalone: true,
-  imports: [TranslateModule, ReactiveFormsModule, 
-    RouterLink, FormsModule,CommonModule
+  imports: [TranslateModule, ReactiveFormsModule, FormsModule,CommonModule
   ],
   templateUrl: './authories-access.component.html',
   styleUrl: './authories-access.component.scss'

@@ -7,6 +7,20 @@
     "add_button": "Ajouter",
     "link_users": "Lier des users"
   },
+  "accessManagement": {
+    "title": "Autoriser l'accès à la caméra",
+    "userEmail": "Email de l'utilisateur",
+    "permissions": "Autorisations",
+    "permissionOptions": {
+      "modifyDetails": "Modifier les détails",
+      "viewVideoStream": "Visionner le flux vidéo",
+      "accessViolationVideos": "Accéder aux vidéos des infractions"
+    },
+    "buttons": {
+      "submit": "Valider et continuer",
+      "back": "Retour"
+    }
+  },
   "cameraListPage": {
     "permissions": "Permissions",
     "modify_camera_details": "Modifier les détails de la caméra",
@@ -87,20 +101,6 @@
   },
   "lastSection": {
     "footer": "© 2024 GUARDIFY. Tous droits réservés."
-  },
-  "accessManagement":{
-    "title": "Autoriser l'accès à la caméra",
-    "userEmail": "Email de l'utilisateur",
-    "permissions": "Autorisations",
-    "permissionOptions": {
-      "modifyDetails": "Modifier les détails",
-      "viewVideoStream": "Visionner le flux vidéo",
-      "accessViolationVideos": "Accéder aux vidéos des infractions"
-    },
-    "buttons": {
-      "submit": "Valider et continuer",
-      "back": "Retour"
-    }
   }
   }
 }

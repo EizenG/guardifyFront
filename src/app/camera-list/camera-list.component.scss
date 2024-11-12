@@ -22,9 +22,6 @@
   }
 }
 
-#cornerWhiteDiv{
-  background-color: $secondary-background;
-}
 
 ::ng-deep .page-item.active .page-link{
   background-color: $secondary-background!important;
@@ -42,7 +39,7 @@
   z-index: 200;
   height: 100vh;
   display: flex;
-  background-color: rgba(151, 153, 251,0.6);
+  background-color: rgba(0, 0, 0,0.6);
 
   .popup{
     max-width: 450px;
@@ -125,17 +122,12 @@
 }
 
 nav {
-  position: relative;
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  justify-content: flex-end;
+  height: 80px;
+  align-items: center;
+  padding: 10px 30px;
 
-  @include mediaMinWidth($width-cameraListPage-breakpoint2){
-    height: 100px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
 
   > a:first-child{
     @include mediaMinWidth($width-cameraListPage-breakpoint2){
@@ -146,10 +138,6 @@ nav {
   img {
     width: 50px;
     height: 50px;
-    @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-      width: 70px;
-      height: 70px;
-    }
   }
 
   div {
@@ -162,10 +150,11 @@ nav {
 }
 
 main {
+  min-width: 100vw;
+  min-height: max-content;
   margin-top: 10px;
 
   @include mediaMinWidth($width-cameraListPage-breakpoint2){
-    height: calc(100vh - 110px);
     display: flex;
     flex-direction: column;
     justify-content: center;
