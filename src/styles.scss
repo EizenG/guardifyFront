@@ -62,19 +62,6 @@ body {
   // background-size: cover;
 }
 
-#cornerWhiteDiv {
-  background-color: $primary-background;
-  height: 130px;
-  width: 130px;
-  border-radius: 50%;
-  position: absolute;
-  left: -55px;
-  top: -55px;
-
-  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-    display: none;
-  }
-}
 
 #mainContainer {
   position: relative;
@@ -358,6 +345,45 @@ body {
   i {
     font-size: 36px;
   }
+}
+
+// Custom scroll bar
+
+/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
+/** {
+  scrollbar-width: thin;
+  scrollbar-color: #9799FB #DFE9EB;
+}*/
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: $secondary-background;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: $secondary-background;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: $secondary-background;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: $accent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: $accent;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: $accent;
 }
 
 

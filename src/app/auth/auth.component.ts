@@ -25,7 +25,7 @@ export class AuthComponent implements OnDestroy {
     email: ["", [Validators.email,Validators.required]],
     password: ["", [Validators.required,Validators.minLength(8),passwordStrengthValidator()]],
     confirmPassword: ["", [Validators.required, Validators.minLength(8),]],
-  }, {validators : passwordConfirmationValidator()});
+  }, { validators: passwordConfirmationValidator("password","confirmPassword")});
   
   signInForm = this.fb.group({
     email: ["", [Validators.email, Validators.required]],

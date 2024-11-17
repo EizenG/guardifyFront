@@ -11,7 +11,7 @@ import { langues } from '../data/langues';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, CommonModule, NgbAlert, TranslateModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

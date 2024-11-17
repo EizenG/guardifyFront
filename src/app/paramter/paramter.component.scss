@@ -15,6 +15,13 @@
   box-shadow: none;
 }
 
+// fin
+
+button:disabled{
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 // Some mixins
 @mixin flexProps1() {
   display: flex;
@@ -23,6 +30,15 @@
 }
 
 /* form input style */
+
+p{
+  text-align: justify;
+  font-size: 12px;
+  width: 90%;
+  color: $deep-maroon;
+  max-width: 306px;
+  margin-bottom: 0;
+}
 
 .formInput {
   height: 48px;

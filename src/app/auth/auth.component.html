@@ -37,9 +37,10 @@
       </div>
       <div>
         <button type="submit" [disabled]="signInForm.invalid" role="button" class="button-1">Se connecter</button>
-        <p>Se connecter avec google</p>
-        <button type="button" class="google-btn" role="button" (click)="signInWithGoogle()"><img src="../../assets/icons/google-icon.png"
-            alt="icon 3d de google"></button>
+         
+        <a class="btn" (click)="signInWithGoogle()">
+          <i class="fa-brands fa-google"></i>
+        </a>
       </div>
     </form>
 
@@ -65,9 +66,10 @@
       </div>
       <div>
         <button type="submit" [disabled]="signUpForm.invalid" role="button" class="button-1">S'inscrire</button>
-        <p>S'inscrire avec google</p>
-        <button type="button" class="google-btn" role="button" (click)="signInWithGoogle()"><img src="../../assets/icons/google-icon.png"
-            alt="icon 3d de google"></button>
+        
+        <a class="btn" (click)="signInWithGoogle()">
+          <i class="fa-brands fa-google"></i>
+        </a>
       </div>
     </form>
   </div>

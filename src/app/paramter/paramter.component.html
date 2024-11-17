@@ -2,7 +2,7 @@
   <div ngbAccordion [closeOthers]="true">
     <div ngbAccordionItem [collapsed]="!isCollasped">
       <h2 ngbAccordionHeader>
-        <button (click)="handleAccordionCollapse()" ngbAccordionButton>Paramètre du compte</button>
+        <button (click)="handleAccordionCollapse()" ngbAccordionButton>{{"params.accountSettings" | translate}}</button>
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
@@ -11,20 +11,20 @@
               <div class="formInput">
                 <label for="firstName" hidden>First name</label>
                 <i class="fa-solid fa-user"></i>
-                <input maxlength="25" formControlName="firstName" placeholder="Prenom" type="text" name="firstName" id="firstName">
+                <input maxlength="25" formControlName="firstName" [placeholder]="'params.firstName' | translate" type="text" name="firstName" id="firstName">
               </div>
               <div class="formInput">
                 <label for="lastName" hidden>Last name</label>
                 <i class="fa-solid fa-user"></i>
-                <input maxlength="25" formControlName="lastName" placeholder="Nom" type="text" name="lastName" id="lastName">
+                <input maxlength="25" formControlName="lastName" [placeholder]="'params.lastName' | translate" type="text" name="lastName" id="lastName">
               </div>
               <div class="formInput">
                 <label for="tel" hidden>Telephone</label>
                 <i class="fa-solid fa-phone"></i>
-                <input maxlength="15" formControlName="tel" placeholder="Telephone" type="tel" name="tel" id="tel">
+                <input maxlength="15" formControlName="tel" [placeholder]="'params.telephone' | translate" type="tel" name="tel" id="tel">
               </div>
 
-              <button class="button-33" type="submit">Sauvegarder</button>
+              <button class="button-33" type="submit">{{"params.saveButton" | translate}}</button>
             </form>
           </ng-template>
         </div>
@@ -33,7 +33,7 @@
 
     <div ngbAccordionItem [collapsed]="isCollasped">
       <h2 ngbAccordionHeader>
-        <button (click)="handleAccordionCollapse()" ngbAccordionButton>Changement de mot de passe</button>
+        <button (click)="handleAccordionCollapse()" ngbAccordionButton>{{"params.passwordChange" | translate }}</button>
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
@@ -42,20 +42,23 @@
               <div class="formInput">
                 <label for="currentPassword" hidden>Current password</label>
                 <i class="fa-solid fa-lock"></i>
-                <input maxlength="20" formControlName="oldPassword" placeholder="Mot de passe actuel" type="password" name="currentPassword" id="currentPassword">
+                <input [ngClass]="{'invalid' : getFormControl('oldPassword')?.touched && getFormControl('oldPassword')?.invalid}" maxlength="20" formControlName="oldPassword" [placeholder]="'params.currentPassword' | translate " type="password" name="currentPassword" id="currentPassword">
               </div>
               <div class="formInput">
                 <label for="newPassword" hidden>New password</label>
                 <i class="fa-solid fa-lock"></i>
-                <input maxlength="20" formControlName="newPassword" placeholder="Nouveau mot de passe" type="password" name="newPassword" id="newPassword">
+                <input maxlength="20" formControlName="newPassword" [placeholder]="'params.newPassword' | translate " type="password" name="newPassword" id="newPassword">
               </div>
+              <p [hidden]="getFormControl('newPassword')?.valid || (getFormControl('newPassword')?.untouched && getFormControl('newPassword')?.pristine && getFormControl('newPassword')?.invalid)">
+                {{"params.passwordRequirements" | translate }}
+              </p>
               <div class="formInput">
                 <label for="confirmNewPassword" hidden>Confirm new password</label>
                 <i class="fa-solid fa-lock"></i>
-                <input maxlength="20" formControlName="confirmPassword" placeholder="Confirmer le mot de passe" type="password" name="confirmNewPassword" id="confirmNewPassword">
+                <input [ngClass]="{'invalid': changePasswordForm.hasError('passwordNotConfirm') && getFormControl('newPassword')?.valid}" maxlength="20" formControlName="confirmPassword" [placeholder]="'params.confirmNewPassword' | translate " type="password" name="confirmNewPassword" id="confirmNewPassword">
               </div>
             
-              <button class="button-33" type="submit">Changer</button>
+              <button [disabled]="changePasswordForm.invalid" class="button-33" type="submit">{{"params.changeButton" | translate }}</button>
             </form>
           </ng-template>
         </div>

@@ -1,4 +1,35 @@
 {
+  "params": {
+    "accountSettings": "Account Settings",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "telephone": "Phone",
+    "saveButton": "Save",
+    "passwordChange": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "passwordRequirements": "The password must contain at least 8 characters, including an uppercase letter, a lowercase letter, and a number.",
+    "confirmNewPassword": "Confirm Password",
+    "changeButton": "Change"
+  },
+  "infractionVideos": {
+    "title": "Infractions Videos",
+    "videosAccordion": {
+      "header": "Videos",
+      "deleteButton": "Delete",
+      "videoList": {
+        "empty": "No videos available"
+      }
+    },
+    "offenseTypes": {
+      "title": "Type of Infractions",
+      "table": {
+        "type": "TYPE",
+        "confidence": "CONFIDENCE",
+        "humanPresence": "Human Presence"
+      }
+    }
+  },
   "sidebar": {
     "add_camera": "Add a camera",
     "home": "Home",

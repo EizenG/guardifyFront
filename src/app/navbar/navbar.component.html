@@ -50,9 +50,9 @@
         <a routerLink="/camera-list" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/notepad.svg" alt="icon notepad"></a>
         <h5 #h5Tag (click)="navigateTo('/camera-list');offcanvas.dismiss('Cross click')">{{"sidebar.view_cameras" | translate }}</h5>
       </div>
-      <div [ngClass]="{'isActive': isActiveUrl('/x')}">
-        <a href="" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/playlist.svg" alt="icon playlist"></a>
-        <h5 #h5Tag>{{"sidebar.view_infractions" | translate }}</h5>
+      <div [ngClass]="{'isActive': isActiveUrl('/infraction-videos')}">
+        <a routerLink="/infraction-videos" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/playlist.svg" alt="icon playlist"></a>
+        <h5 (click)="navigateTo('/infraction-videos');offcanvas.dismiss('Cross click')" #h5Tag>{{"sidebar.view_infractions" | translate }}</h5>
       </div>
       <div [ngClass]="{'isActive': isActiveUrl('/x')}">
         <a href="" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/criteria.svg" alt="icon criteria"></a>
@@ -65,10 +65,10 @@
     </div>
 
     <div>
-      <button *ngIf="!userUid" (click)="handleLogin()"><img src="../../assets/icons/login.svg" alt="icon login"></button>
-      <button *ngIf="userUid" (click)="handleLogoutOrGoToSignIn()"><img src="../../assets/icons/logout.svg"
+      <button *ngIf="!userUid" (click)="handleLogin();offcanvas.dismiss('Cross click')"><img src="../../assets/icons/login.svg" alt="icon login"></button>
+      <button *ngIf="userUid" (click)="handleLogoutOrGoToSignIn();offcanvas.dismiss('Cross click')"><img src="../../assets/icons/logout.svg"
           alt="icon login"></button>
-      <h5 [ngStyle]="(userUid)?{'color':'#5E0B0B'}:{'color':'white'}" (click)="handleLogoutOrGoToSignIn()" #h5Tag> {{
+      <h5 [ngStyle]="(userUid)?{'color':'#5E0B0B'}:{'color':'white'}" (click)="handleLogoutOrGoToSignIn();offcanvas.dismiss('Cross click')" #h5Tag> {{
         (userUid)?("sidebar.logout" | translate ):("sidebar.login" | translate) }}</h5>
     </div>
   </div>

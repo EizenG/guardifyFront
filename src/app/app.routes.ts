@@ -7,6 +7,7 @@ import { AuthoriesAccessComponent } from './authories-access/authories-access.co
 import { CameraStreamComponent } from './camera-stream/camera-stream.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ParamterComponent } from './paramter/paramter.component';
+import { OffenceVideoComponent } from './offence-video/offence-video.component';
 
 export const routes: Routes = [
   {path:"",component:HomeComponent,title : "Guardify - Home"},
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: "authories-user",component: AuthoriesAccessComponent,title: "Guardify - Access management"},
   { path: "stream", component: CameraStreamComponent, title: "Guardify - camera stream" },
   { path: "parameter", component: ParamterComponent, title: "Guardify - parameter" },
+  { path: "infraction-videos", component: OffenceVideoComponent, title: "Guardify - Infraction Video" },
   { path: "**", redirectTo: "" },
 ];
