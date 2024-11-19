@@ -10,11 +10,13 @@
 
       <div>
         <label for="localisation"></label>
-        <input [ngStyle]="(addCameraForm.get('localisation')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
+        <input max="59" [ngStyle]="(addCameraForm.get('localisation')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
           [placeholder]="'addCameraPage.location' | translate " formControlName="localisation" type="text"
           name="localisation " id="localisation">
+          <p id="errorMsg" *ngIf="addCameraForm.get('localisation')?.hasError('maxlength')">
+            {{"addCameraPage.locationMaxCaracterError" | translate}}
+          </p>
       </div>
-
       <div>
         <div class="checkbox-wrapper-5">
           <div class="check">

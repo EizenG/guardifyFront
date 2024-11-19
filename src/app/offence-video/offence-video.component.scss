@@ -7,6 +7,13 @@
   color: white !important;
 }
 
+.accordion{
+
+  @include mediaMinWidth(1336px){
+    min-width: 500px;
+  }
+}
+
 .accordion-button::after {
   background-image: url("data: image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white' ><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' /></svg>");
 }
@@ -25,6 +32,7 @@ main{
   padding: 50px 20px 30px;
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 80px);
   row-gap: 20px;
   align-items: center;
   background-image: url('../../assets/background.svg');
@@ -41,6 +49,17 @@ main{
 
     img{
       height: 300px;
+    }
+  }
+
+  >div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    column-gap: 10px;
+
+    @include mediaMinWidth(1336px) {
+        flex-direction: row;
     }
   }
 

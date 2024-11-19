@@ -222,34 +222,36 @@ main {
 
 #cameraList {
   display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 10px;
+  grid-template-columns: repeat(auto-fit,minmax(304px,1fr));
+  gap: 10px;
+  // display: grid;
+  // grid-template-columns: 1fr;
+  // row-gap: 10px;
   margin: 25px auto;
   width: 95vw;
   max-width: 1242px;
-  @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 400px);
-      gap: 10px;
-      justify-content: center;
-      width: 100vw;
-      padding-inline: 5px;
-  }
+  // @include mediaMinWidth($width-cameraListPage-breakpoint2) {
+  //     display: grid;
+  //     grid-template-columns: repeat(auto-fill, 400px);
+  //     gap: 10px;
+  //     justify-content: center;
+  //     width: 100vw;
+  //     padding-inline: 5px;
+  // }
 
-  @include mediaMinWidth($width-cameraListPage-breakpoint3){
-    padding-inline: 10px;
-  }
+  // @include mediaMinWidth($width-cameraListPage-breakpoint3){
+  //   padding-inline: 10px;
+  // }
 
   // Card for camera
 
   .cameraCard {
     position: relative;
     height: 100px;
-    width: 95vw;
+    width: 100%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     @include mediaMinWidth($width-cameraListPage-breakpoint2){
       margin: 0;
-      max-width: 400px;
     }
     margin-inline: auto;
     display: flex;
@@ -312,6 +314,7 @@ main {
 
       p {
         padding-left: 50px;
+        line-height: 23px;
         padding-top: 5px;
         color: white;
       }

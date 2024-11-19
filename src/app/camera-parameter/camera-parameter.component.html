@@ -1,0 +1,63 @@
+<main>
+  <div>
+    <div ngbAccordion [closeOthers]="true">
+      <div ngbAccordionItem [collapsed]="!isCollasped">
+        <h2 ngbAccordionHeader>
+          <button (click)="handleAccordionCollapse()" ngbAccordionButton>Parametres de la camera</button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <ng-template>
+              <form [formGroup]="cameraParamForm">
+                <div>
+                  <label for="id_camera"></label>
+                  <input
+                    [ngStyle]="(cameraParamForm.get('id_camera')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'1px solid black'}"
+                    [placeholder]="'addCameraPage.camera_id' | translate" formControlName="id_camera" type="text"
+                    name="id_camera" id="id_camera">
+                </div>
+    
+                <div>
+                  <label for="localisation"></label>
+                  <input max="59"
+                    [ngStyle]="(cameraParamForm.get('localisation')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'1px solid black'}"
+                    [placeholder]="'addCameraPage.location' | translate " formControlName="localisation" type="text"
+                    name="localisation " id="localisation">
+                  <p id="errorMsg" *ngIf="cameraParamForm.get('localisation')?.hasError('maxlength')">
+                    {{"addCameraPage.locationMaxCaracterError" | translate}}
+                  </p>
+                </div>
+                <div>
+                  <div class="checkbox-wrapper-5">
+                    <div class="check">
+                      <input formControlName="status" type="checkbox" name="status " id="status">
+                      <label for="status"></label>
+                    </div>
+                  </div>
+                  <p>{{ "addCameraPage.is_active" | translate }}</p>
+                </div>
+                <div>
+                  <button [disabled]="!cameraParamForm.valid" class="button-33" type="submit" role="button">{{
+                    "params.saveButton" | translate }}</button>
+                </div>
+              </form>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    
+      <div ngbAccordionItem [collapsed]="isCollasped">
+        <h2 ngbAccordionHeader>
+          <button (click)="handleAccordionCollapse()" ngbAccordionButton>Administrateurs</button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <ng-template>
+              222222
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

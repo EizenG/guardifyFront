@@ -35,7 +35,8 @@
     "location": "Localisation : Auchan-Mbour-Entre",
     "is_active": "Est actif",
     "add_button": "Ajouter",
-    "link_users": "Lier des users"
+    "link_users": "Lier des users",
+    "locationMaxCaracterError" : "Vous pouvez mettre au max 59 caractères pour la localisation."
   },
   "accessManagement": {
     "title": "Autoriser l'accès à la caméra",

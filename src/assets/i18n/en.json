@@ -103,7 +103,8 @@
     "location": "Location : Auchan-Mbour-Entre",
     "is_active": "Is active",
     "add_button": "Add",
-    "link_users": "Link users"
+    "link_users": "Link users",
+    "locationMaxCaracterError": "You can set a maximum of 59 characters for the location."
   },
   "accessManagement": {
     "title": "Authorize camera access",

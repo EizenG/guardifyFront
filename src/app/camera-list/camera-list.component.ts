@@ -4,7 +4,7 @@ import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-d
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { dropdownListPermissions,dropdownSettingsPermissions } from '../data/permissionsDropdown';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
@@ -14,7 +14,8 @@ import { FirebaseService } from '../services/firebaseService/firebase.service';
 @Component({
   selector: 'app-camera-list',
   standalone: true,
-  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination,TranslateModule],
+  imports: [NgMultiSelectDropDownModule,CommonModule,FormsModule,NgbPagination,TranslateModule,
+  RouterModule],
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })
@@ -59,7 +60,7 @@ export class CameraListComponent implements AfterViewInit {
   fakeData: Camera[] = [
     {
       "id_camera": "47392",
-      "location": "Auchan Dakar Sud",
+      "location": "Auchan Dakar Sud ffffffffffffffffffffffffffffffffffffffffff",
       "permissions": [2, 4],
       "status": true,
       "isOwner": true
