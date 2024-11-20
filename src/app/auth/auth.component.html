@@ -10,33 +10,33 @@
 <main id="mainContainer">
   <div id="switchContainer" #switchContainer>
     <div #switchContainerDiv>
-      <h2>Vous avez un compte ?</h2>
-      <p>Nous vous attendions.</p>
-      <button (click)="switchToLoginPage()" role="button" class="button-1 buttonStyle2">Se connecter</button>
+      <h2>{{"forms.switch.toSignInTitle" | translate }}</h2>
+      <p>{{"forms.switch.toSignInText" | translate }}</p>
+      <button (click)="switchToLoginPage()" role="button" class="button-1 buttonStyle2">{{"forms.switch.toSignInButton" | translate }}</button>
     </div>
 
     <div #switchContainerDiv>
-      <h2>Nouveau ici ?</h2>
-      <p>Rejoignez-nous dès maintenant.</p>
-      <button (click)="switchToSignUpPage()" role="button" class="button-1 buttonStyle2">S'inscrire</button>
+      <h2>{{"forms.switch.toSignUpTitle" | translate }}</h2>
+      <p>{{"forms.switch.toSignUpText" | translate }}</p>
+      <button (click)="switchToSignUpPage()" role="button" class="button-1 buttonStyle2">{{"forms.switch.toSignUpButton" | translate }}</button>
     </div>
   </div>
   <div id="formContainer">
     <form [formGroup]="signInForm" (submit)="submitSignInForm()" id="signInForm" #signInform>
-      <h1>Connexion</h1>
+      <h1>{{"forms.signIn.title" | translate }}</h1>
       <div class="formInput">
-        <label for="email1" style="display: none;">Email</label>
+        <label for="email1" style="display: none;">{{"forms.signIn.emailPlaceholder" | translate }}</label>
         <i class="fa-solid fa-envelope"></i>
-        <input maxlength="36" formControlName="email" type="email" placeholder="Email" name="email" id="email1">
+        <input maxlength="36" formControlName="email" type="email" [placeholder]="'forms.signIn.emailPlaceholder' | translate " name="email" id="email1">
       </div>
       <div class="formInput">
-        <label for="password1" style="display: none;">Password</label>
+        <label for="password1" style="display: none;">{{"forms.signIn.passwordPlaceholder" | translate }}</label>
         <i (click)="showOrHidePassword($event)" class="fa-solid fa-eye"></i>
-        <input  maxlength="25" formControlName="password" type="password" placeholder="Mot de passe" name="password1"
+        <input  maxlength="25" formControlName="password" type="password" [placeholder]="'forms.signIn.passwordPlaceholder' | translate" name="password1"
           id="password1">
       </div>
       <div>
-        <button type="submit" [disabled]="signInForm.invalid" role="button" class="button-1">Se connecter</button>
+        <button type="submit" [disabled]="signInForm.invalid" role="button" class="button-1">{{"forms.signIn.submitButton" | translate }}</button>
          
         <a class="btn" (click)="signInWithGoogle()">
           <i class="fa-brands fa-google"></i>
@@ -45,27 +45,27 @@
     </form>
 
     <form [formGroup]="signUpForm" id="signUpForm" (ngSubmit)="submitSignUpForm()" #signUpform>
-      <h1>Inscription</h1>
+      <h1>{{"forms.signUp.title" | translate}}</h1>
       <div class="formInput">
-        <label for="email2" style="display: none;">Email</label>
+        <label for="email2" style="display: none;">{{"forms.signUp.emailPlaceholder" | translate}}</label>
         <i class="fa-solid fa-envelope"></i>
-        <input [ngClass]="{'invalid':getFormControl('email')?.dirty && getFormControl('email')?.invalid || (getFormControl('email')?.touched && getFormControl('email')?.invalid)}" maxlength="36" formControlName="email" type="email" placeholder="Email" name="email" id="email2">
+        <input [ngClass]="{'invalid':getFormControl('email')?.dirty && getFormControl('email')?.invalid || (getFormControl('email')?.touched && getFormControl('email')?.invalid)}" maxlength="36" formControlName="email" type="email" [placeholder]="'forms.signUp.emailPlaceholder' | translate" name="email" id="email2">
       </div>
       <div class="formInput">
-        <label for="password1_bis" style="display: none;">Password</label>
+        <label for="password1_bis" style="display: none;">{{"forms.signUp.passwordPlaceholder" | translate}}</label>
         <i (click)="showOrHidePassword($event)" class="fa-solid fa-eye"></i>
-        <input [ngClass]="{'invalid':getFormControl('password')?.dirty && getFormControl('password')?.invalid || (getFormControl('password')?.touched && getFormControl('password')?.invalid)}" maxlength="25" formControlName="password" type="password" placeholder="Mot de passe" name="password1_bis"
+        <input [ngClass]="{'invalid':getFormControl('password')?.dirty && getFormControl('password')?.invalid || (getFormControl('password')?.touched && getFormControl('password')?.invalid)}" maxlength="25" formControlName="password" type="password" [placeholder]="'forms.signUp.passwordPlaceholder' | translate " name="password1_bis"
           id="password1_bis">
       </div>
-      <p [hidden]="getFormControl('password')?.valid || (getFormControl('password')?.untouched && getFormControl('password')?.pristine && getFormControl('password')?.invalid)">Le mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule et un chiffre.</p>
+      <p [hidden]="getFormControl('password')?.valid || (getFormControl('password')?.untouched && getFormControl('password')?.pristine && getFormControl('password')?.invalid)">{{"forms.errors.passwordStrength" | translate}}</p>
       <div class="formInput">
-        <label for="password2" style="display: none;">Password confirmation</label>
+        <label for="password2" style="display: none;">{{"forms.signUp.confirmPasswordPlaceholder" | translate}}</label>
         <i (click)="showOrHidePassword($event)" class="fa-solid fa-eye"></i>
         <input [ngClass]="{'invalid':getFormControl('confirmPassword')?.dirty && getFormControl('confirmPassword')?.valid && signUpForm.invalid && getFormControl('password')?.valid || (getFormControl('confirmPassword')?.touched && getFormControl('confirmPassword')?.invalid && getFormControl('password')?.valid)}" maxlength="25" formControlName="confirmPassword" type="password"
-          placeholder="Confirmation du mot de passe" name="password2" id="password2">
+          [placeholder]="'forms.signUp.confirmPasswordPlaceholder' | translate" name="password2" id="password2">
       </div>
       <div>
-        <button type="submit" [disabled]="signUpForm.invalid" role="button" class="button-1">S'inscrire</button>
+        <button type="submit" [disabled]="signUpForm.invalid" role="button" class="button-1">{{"forms.signUp.submitButton" | translate}}</button>
         
         <a class="btn" (click)="signInWithGoogle()">
           <i class="fa-brands fa-google"></i>

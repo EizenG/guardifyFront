@@ -9,6 +9,7 @@
   overflow-x: hidden;
   overflow-y: visible;
   position: relative;
+  min-height: 100vh;
 }
 
 #noData{
@@ -224,24 +225,9 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(304px,1fr));
   gap: 10px;
-  // display: grid;
-  // grid-template-columns: 1fr;
-  // row-gap: 10px;
   margin: 25px auto;
   width: 95vw;
   max-width: 1242px;
-  // @include mediaMinWidth($width-cameraListPage-breakpoint2) {
-  //     display: grid;
-  //     grid-template-columns: repeat(auto-fill, 400px);
-  //     gap: 10px;
-  //     justify-content: center;
-  //     width: 100vw;
-  //     padding-inline: 5px;
-  // }
-
-  // @include mediaMinWidth($width-cameraListPage-breakpoint3){
-  //   padding-inline: 10px;
-  // }
 
   // Card for camera
 

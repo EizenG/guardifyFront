@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, tap } from 'rxjs/operators';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { langues } from '../data/langues';
 
 
 
@@ -16,7 +18,7 @@ import { debounceTime, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,NgbAlert],
+  imports: [ReactiveFormsModule,CommonModule,NgbAlert,TranslateModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
@@ -40,6 +42,7 @@ export class AuthComponent implements OnDestroy {
   @ViewChild('selfClosingAlert2', { static: false }) selfClosingAlert2 !: NgbAlert;
   errorMessage = '';
   errorMessage2 = '';
+  translate = inject(TranslateService);
   private _message$ = new Subject<string>();
   private _message2$ = new Subject<string>();
 
@@ -53,9 +56,17 @@ export class AuthComponent implements OnDestroy {
   firebaseService = inject(FirebaseService);
 
   router = inject(Router);
+  langue ?: string | null;
 
   // Constructor
   constructor(private fb : FormBuilder){
+    this.langue = localStorage.getItem("langue");
+    if (this.langue && langues.includes(this.langue)) {
+      this.translate.setDefaultLang(this.langue);
+    } else {
+      this.translate.setDefaultLang(langues[0]);
+    }
+    
     this.errorMessageSubscription = this._message$
       .pipe(
         takeUntilDestroyed(),
@@ -153,11 +164,20 @@ export class AuthComponent implements OnDestroy {
           },
           error : (error : any) => {
             if (error.code == "auth/invalid-email"){
-              this.changeErrorMessage("Attention le mail semble incorrect !!!")
+              if(this.langue == langues[0])
+                this.changeErrorMessage("Attention le mail semble incorrect !!!")
+              else
+                this.changeErrorMessage("Warning: The email seems incorrect!!!");
             } else if (error.code == "auth/email-already-in-use"){
-              this.changeErrorMessage("Attention l'email est déjà utilisé !!!")
+              if(this.langue == langues[0])
+                this.changeErrorMessage("Attention l'email est déjà utilisé !!!")
+              else
+                this.changeErrorMessage("Warning: The email is already used!!!");
             }else{
-              this.changeErrorMessage("Attention une erreur est survenue !!!")
+              if(this.langue == langues[0])
+                this.changeErrorMessage("Attention une erreur est survenue !!!");
+              else
+                this.changeErrorMessage("Warning: An error has occurred!!!");
             }
           }
         }
@@ -191,10 +211,18 @@ export class AuthComponent implements OnDestroy {
         },
         error: (error: any) => {
           if (error.code == "auth/invalid-credential") {
-            this.changeErrorMessage("Attention les informations de connexion sont incorrectes !!!");
-            this.changeErrorMessage2("Si vous aviez un compte, essayez de vous connecter avec votre compte Google associé à l'email utilisé précédemment.");
+            if(this.langue == langues[0]){
+              this.changeErrorMessage("Attention les informations de connexion sont incorrectes !!!");
+              this.changeErrorMessage2("Si vous aviez un compte, essayez de vous connecter avec votre compte Google associé à l'email utilisé précédemment.");
+            }else{
+              this.changeErrorMessage("Warning: The login information is incorrect!!!");
+              this.changeErrorMessage2("If you had an account, try logging in with the Google account associate.");
+            }
           } else {
-            this.changeErrorMessage("Attention une erreur est survenue !!!");
+            if(this.langue == langues[0])
+              this.changeErrorMessage("Attention une erreur est survenue !!!");
+            else
+              this.changeErrorMessage("Warning: An error has occurred!!!");
           }
         }
       });
@@ -207,7 +235,10 @@ export class AuthComponent implements OnDestroy {
         this.router.navigate(['./']);
       },
       error : () =>{
-        this.changeErrorMessage("Attention une erreur est survenue !!!");
+        if(this.langue == langues[0])
+          this.changeErrorMessage("Attention une erreur est survenue !!!");
+        else
+          this.changeErrorMessage("Warning: An error has occurred!!!");
       }
     });
   }

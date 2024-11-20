@@ -1,4 +1,40 @@
 {
+  "forms": {
+    "errors": {
+      "passwordStrength": "Le mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule et un chiffre."
+    },
+    "signIn": {
+      "title": "Connexion",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Mot de passe",
+      "submitButton": "Se connecter",
+      "googleButton": "Se connecter avec Google"
+    },
+    "signUp": {
+      "title": "Inscription",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Mot de passe",
+      "confirmPasswordPlaceholder": "Confirmation du mot de passe",
+      "submitButton": "S'inscrire",
+      "googleButton": "S'inscrire avec Google"
+    },
+    "switch": {
+      "toSignInTitle": "Vous avez un compte ?",
+      "toSignInText": "Nous vous attendions.",
+      "toSignInButton": "Se connecter",
+      "toSignUpTitle": "Nouveau ici ?",
+      "toSignUpText": "Rejoignez-nous dès maintenant.",
+      "toSignUpButton": "S'inscrire"
+    }
+  },
+  "cameraParams": {
+    "title1": "Paramètres de la caméra",
+    "title2" : "Administrateurs"
+  },
+  "popup": {
+    "confirmDeletion": "Confirmez-vous la suppression?",
+    "warning": "Attention! Cette action est irréversible."
+  },
   "params": {
     "accountSettings": "Paramètre du compte",
     "firstName": "Prénom",

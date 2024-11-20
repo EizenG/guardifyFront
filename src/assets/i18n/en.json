@@ -1,4 +1,40 @@
 {
+  "forms": {
+    "errors": {
+      "passwordStrength": "The password must contain at least 8 characters, including an uppercase letter, a lowercase letter, and a number."
+    },
+    "signIn": {
+      "title": "Sign In",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "submitButton": "Sign In",
+      "googleButton": "Sign in with Google"
+    },
+    "signUp": {
+      "title": "Sign Up",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "confirmPasswordPlaceholder": "Confirm Password",
+      "submitButton": "Sign Up",
+      "googleButton": "Sign up with Google"
+    },
+    "switch": {
+      "toSignInTitle": "Already have an account?",
+      "toSignInText": "We’ve been waiting for you.",
+      "toSignInButton": "Sign In",
+      "toSignUpTitle": "New here?",
+      "toSignUpText": "Join us now.",
+      "toSignUpButton": "Sign Up"
+    }
+  },
+  "cameraParams": {
+    "title1": "Camera Settings",
+    "title2" : "Administrators"
+  },
+  "popup": {
+    "confirmDeletion": "Do you confirm the deletion?",
+    "warning": "Warning! This action is irreversible."
+  },
   "params": {
     "accountSettings": "Account Settings",
     "firstName": "First Name",

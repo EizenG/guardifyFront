@@ -1,9 +1,24 @@
+
+<div class="popupLayer" [ngStyle]="{'display' : (isPopupInfVisible)?'flex':'none'}">
+  <div class="popup">
+    <div><i (click)="isPopupInfVisible = false;" style="color:#9799FB;" class="fa-solid fa-xmark"></i></div>
+    <div>
+      <h4>{{"popup.confirmDeletion" | translate }}</h4>
+      <p>{{"popup.warning" | translate }}</p>
+      <div>
+        <button type="button" (click)="isPopupInfVisible=false"><i class="fa-solid fa-xmark"></i></button>
+        <button><i class="fa-solid fa-check"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <main>
   <div>
     <div ngbAccordion [closeOthers]="true">
       <div ngbAccordionItem [collapsed]="!isCollasped">
         <h2 ngbAccordionHeader>
-          <button (click)="handleAccordionCollapse()" ngbAccordionButton>Parametres de la camera</button>
+          <button (click)="handleAccordionCollapse()" ngbAccordionButton>{{"cameraParams.title1" | translate }}</button>
         </h2>
         <div ngbAccordionCollapse>
           <div ngbAccordionBody>
@@ -37,6 +52,7 @@
                   <p>{{ "addCameraPage.is_active" | translate }}</p>
                 </div>
                 <div>
+                  <button class="button-33" role="button" type="button" (click)="previousWindows()">{{"accessManagement.buttons.back" | translate }}</button>
                   <button [disabled]="!cameraParamForm.valid" class="button-33" type="submit" role="button">{{
                     "params.saveButton" | translate }}</button>
                 </div>
@@ -48,12 +64,46 @@
     
       <div ngbAccordionItem [collapsed]="isCollasped">
         <h2 ngbAccordionHeader>
-          <button (click)="handleAccordionCollapse()" ngbAccordionButton>Administrateurs</button>
+          <button (click)="handleAccordionCollapse()" ngbAccordionButton>{{"cameraParams.title2" | translate}}</button>
         </h2>
         <div ngbAccordionCollapse>
           <div ngbAccordionBody>
             <ng-template>
-              222222
+              <div id="adminCardContainer">
+                <ng-container *ngFor="let admin of adminList">
+                  <div class="adminCard">
+                    <p>
+                      {{"params.firstName" | translate }} : {{ admin.firstName }} <br>
+                      {{"params.lastName" | translate }} : {{ admin.lastName }} <br>
+                      {{"home.fourthSection.form.emailLabel" | translate}} : {{ admin.email }} <br>
+                      {{"accessManagement.permissions" | translate}} : {{ admin.permissions }}
+                    </p>
+                  
+                    <div>
+                      <label class="flipBox" aria-label="Checkbox 1">
+                        <input type="checkbox" />
+                        <span></span>
+                        <div class="flipBox_boxOuter">
+                          <div class="flipBox_box">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                        </div>
+                        <div class="flipBox_shadow"></div>
+                      </label>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div id="actionBtnsDiv">
+                <button class="button-33" role="button" type="button" (click)="previousWindows()"><i class="fa-solid fa-arrow-left" style="color: white;"></i></button>
+                <button (click)="isPopupInfVisible=true" class="suppBtn" type="button"><i style="color: white;" class="fa-solid fa-trash"></i></button>
+                <button routerLink="/authories-user" type="button"><i style="color: white;" class="fa-solid fa-plus"></i></button>
+              </div>
             </ng-template>
           </div>
         </div>
