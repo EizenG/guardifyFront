@@ -42,7 +42,12 @@ export class HomeComponent implements AfterViewInit {
 
     onAuthStateChanged(this.firebaseService.firebaseAuth, (user) => {
       if (user) {
-        this.userUid = user.email;
+        this.userUid = user.uid;
+        this.firebaseService.firebaseAuth.currentUser?.getIdTokenResult()
+        .then((tokenResult) => {
+          console.log(tokenResult.claims['role']);
+        });
+
       } else {
         this.userUid = null;
       }
