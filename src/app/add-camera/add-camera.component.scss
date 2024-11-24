@@ -53,9 +53,15 @@ main{
       &:focus{
         outline: none;
       }
+
+      &:disabled{
+        background-color: $secondary-background;
+        opacity: 0.6;
+        color: white!important;
+      }
     }
 
-    > div:nth-child(3){
+    > div:nth-child(4){
       display: flex;
       align-items: center;
       column-gap: 20px;

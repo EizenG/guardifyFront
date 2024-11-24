@@ -182,7 +182,6 @@ export class CameraListComponent implements AfterViewInit {
         this.userUID = user.uid;
       }else{
         this.userUID = null;
-        alert("Not login")
         this.router.navigate(["./","login-logout"]);
       }
     });

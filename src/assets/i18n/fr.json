@@ -1,4 +1,8 @@
 {
+  "unauthorize": {
+    "message": "Désolé, il est interdit d'aller au-delà de ce point !",
+    "goback": "S'il vous plaît, revenez par ici."
+  },
   "forms": {
     "errors": {
       "passwordStrength": "Le mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule et un chiffre."
@@ -68,6 +72,7 @@
   "addCameraPage": {
     "add_camera": "Ajouter une caméra ",
     "camera_id": "Id caméra",
+    "ownerUID" : "Entrez l'UID du propriétaire" ,
     "location": "Localisation : Auchan-Mbour-Entre",
     "is_active": "Est actif",
     "add_button": "Ajouter",

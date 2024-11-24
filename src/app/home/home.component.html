@@ -1,3 +1,13 @@
+<div id="OperationResultInf">
+  @if (errorMessage) {
+  <ngb-alert #selfClosingAlertError type="danger" (closed)="errorMessage = ''">{{ errorMessage }}</ngb-alert>
+  }
+
+  @if (successMessage) {
+  <ngb-alert #selfClosingAlertSuccess type="success" (closed)="successMessage = ''">{{ successMessage }}</ngb-alert>
+  }
+</div>
+
 <div id="mainContainer" #mainContainer>
   <div id="langContainer">
     <img src="../../assets/icons/france.png" alt="drapeau france" style="display: none;" (click)="changeLang('fr')" #frFlag>
@@ -111,29 +121,29 @@
 
     <section id="fourthSection">
       <h2>{{"home.fourthSection.contactUs" | translate}}</h2>
-      <form action="">
+      <form [formGroup]="contactUsForm" (submit)="sendEmail($event)">
         <div>
           <div>
-            <label for="name">{{"home.fourthSection.form.nameLabel" | translate}}</label>
-            <input type="text" name="name" id="name">
+            <label for="name">{{"home.fourthSection.form.nameLabel" | translate}} <span style="color: red;font-weight: bold;">*</span></label>
+            <input formControlName = "name" type="text" name="name" id="name">
           </div>
 
           <div>
-            <label for="email">{{"home.fourthSection.form.emailLabel" | translate}}</label>
-            <input type="text" name="email" id="email">
+            <label for="email">{{"home.fourthSection.form.emailLabel" | translate}} <span style="color: red;font-weight: bold;">*</span></label>
+            <input formControlName = "email" type="text" name="email" id="email">
           </div>
 
           <div>
-            <label for="tel">{{"home.fourthSection.form.telLabel" | translate}}</label>
-            <input type="text" name="tel" id="tel">
+            <label for="tel">{{"home.fourthSection.form.telLabel" | translate}} <span style="color: red;font-weight: bold;">*</span></label>
+            <input formControlName="tel" type="tel" name="tel" id="tel">
           </div>
         </div>
 
         <div id="msgTextarea">
-          <label for="message">{{"home.fourthSection.form.messageLabel" | translate}}</label>
-          <textarea name="message" id="message"></textarea>
+          <label for="message">{{"home.fourthSection.form.messageLabel" | translate}} <span style="color: red;font-weight: bold;">*</span></label>
+          <textarea formControlName="message" name="message" id="message"></textarea>
         </div>
-        <button class="button-33" type="button" role="button">{{"home.fourthSection.form.submitButton" | translate}}</button>
+        <button [disabled]="!contactUsForm.valid" class="button-33" type="submit" role="button">{{"home.fourthSection.form.submitButton" | translate}}</button>
       </form>
     </section>
 

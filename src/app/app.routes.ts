@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ParamterComponent } from './paramter/paramter.component';
 import { OffenceVideoComponent } from './offence-video/offence-video.component';
 import { CameraParameterComponent } from './camera-parameter/camera-parameter.component';
+import { UnauthorizeComponent } from './unauthorize/unauthorize.component';
 
 export const routes: Routes = [
   {path:"",component:HomeComponent,title : "Guardify - Home"},
@@ -20,5 +21,6 @@ export const routes: Routes = [
   { path: "parameter", component: ParamterComponent, title: "Guardify - parameter" },
   { path: "infraction-videos", component: OffenceVideoComponent, title: "Guardify - Infraction Video" },
   { path: "camera-parameter", component: CameraParameterComponent, title: "Guardify - Camera parameter" },
+  { path: "unauthorize", component: UnauthorizeComponent, title: "Guardify - Unauthorize" },
   { path: "**", redirectTo: "" },
 ];

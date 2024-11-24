@@ -1,7 +1,14 @@
 <div id="mainContainer">
   <main>
     <h1>{{ "addCameraPage.add_camera" | translate }}</h1>
-    <form [formGroup]="addCameraForm">
+    <form [formGroup]="addCameraForm" (submit)="addCamera()">
+      <div>
+        <label for="id_ownerUID"></label>
+        <input [ngStyle]="(addCameraForm.get('ownerUID')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
+          [placeholder]="'addCameraPage.ownerUID' | translate" formControlName="ownerUID" type="text" name="id_ownerUID"
+          id="id_ownerUID">
+      </div>
+
       <div>
         <label for="id_camera"></label>
         <input [ngStyle]="(addCameraForm.get('id_camera')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}" [placeholder]="'addCameraPage.camera_id' | translate" formControlName="id_camera" type="text"
@@ -35,3 +42,6 @@
     </form>
   </main>
 </div>
+
+<ngx-loading [show]="loading" [config]="loadersConfig"
+ ></ngx-loading>

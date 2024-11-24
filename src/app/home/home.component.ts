@@ -1,31 +1,50 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FirebaseService } from '../services/firebaseService/firebase.service';
 import { onAuthStateChanged } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlert, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslationService } from '../services/translation/translation.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
+import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
+import { emailjsConfig } from '../../../emailConfig';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Subscription, debounceTime, tap } from 'rxjs';
+import { MessageService } from '../services/message.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule,ReactiveFormsModule,NgbAlertModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit,OnDestroy {
   @ViewChild("mainContainer") mainContainer !: ElementRef;
   @ViewChildren("h5Tag") h5Tags !: QueryList<ElementRef>;
   @ViewChild('selfClosingAlertError', { static: false }) selfClosingAlertError !: NgbAlert;
   @ViewChild('selfClosingAlertSuccess', { static: false }) selfClosingAlertSuccess !: NgbAlert;
+  errorMessage = '';
+  successMessage = '';
+  errorMessageSubscription: Subscription | null = null;
+  successMessageSubscription: Subscription | null = null;
   @ViewChild('frFlag') frFlagImg !: ElementRef;
   @ViewChild('ukFlag') ukFlagImg !: ElementRef;
 
   // Services
   firebaseService = inject(FirebaseService);
   router = inject(Router);
+  fb = inject(FormBuilder);
+  msgService = inject(MessageService);
+
+  contactUsForm = this.fb.group({
+    name : ['',Validators.required],
+    email : ['',[Validators.required,Validators.email]],
+    tel : ['',Validators.required],
+    message : ['',Validators.required]
+  });
 
   userUid: string | null = null;
 
@@ -39,22 +58,42 @@ export class HomeComponent implements AfterViewInit {
     } else {
       this.translate.setDefaultLang(langues[0]);
     }
-
     onAuthStateChanged(this.firebaseService.firebaseAuth, (user) => {
       if (user) {
         this.userUid = user.uid;
-        this.firebaseService.firebaseAuth.currentUser?.getIdTokenResult()
-        .then((tokenResult) => {
-          console.log(tokenResult.claims['role']);
-        });
-
       } else {
         this.userUid = null;
       }
       this.cdref.detectChanges();
     });
 
+    this.errorMessageSubscription = this.msgService._messageError$
+      .pipe(
+        takeUntilDestroyed(),
+        tap((message) => (this.errorMessage = message)),
+        debounceTime(5000),
+      )
+      .subscribe(() => this.selfClosingAlertError?.close());
+
+    this.successMessageSubscription = this.msgService._messageSuccess$
+      .pipe(
+        takeUntilDestroyed(),
+        tap((message) => (this.successMessage = message)),
+        debounceTime(5000),
+      )
+      .subscribe(() => this.selfClosingAlertSuccess?.close());
+
   }
+
+  ngOnDestroy(): void {
+    if (this.errorMessageSubscription) {
+      this.errorMessageSubscription.unsubscribe();
+    }
+    if (this.successMessageSubscription) {
+      this.successMessageSubscription.unsubscribe();
+    }
+  }
+
   ngAfterViewInit(): void {
     const langue = localStorage.getItem("langue");
     if (langue && langue == "en") {
@@ -73,6 +112,30 @@ export class HomeComponent implements AfterViewInit {
     }
 
     this.translationService.changeLang(lang);
+  }
+
+  sendEmail(e: Event) {
+    e.preventDefault();
+
+    emailjs.sendForm(emailjsConfig.serviceId, emailjsConfig.homeEmailTemplate, e.target as HTMLFormElement, {
+        publicKey: emailjsConfig.publicKey,
+      })
+      .then(
+        () => {
+          if (localStorage.getItem("langue") == "fr") {
+            this.msgService.changeSuccessMessage("Le mail a été envoyé avec succès.");
+          } else {
+            this.msgService.changeSuccessMessage("The email has been sent successfully.");
+          }
+        },
+        (error) => {
+          if(localStorage.getItem("langue") == "fr"){
+            this.msgService.changeErrorMessage("L'envoi du mail a échoué.");
+          }else{
+            this.msgService.changeErrorMessage("The email failed to send.");
+          }
+        },
+      );
   }
 
 }

@@ -1,4 +1,8 @@
 {
+  "unauthorize" :{
+    "message" : "Sorry, it's not allowed to go beyond this point!",
+    "goback" : "Please, go back this way."
+  },
   "forms": {
     "errors": {
       "passwordStrength": "The password must contain at least 8 characters, including an uppercase letter, a lowercase letter, and a number."
@@ -137,6 +141,7 @@
     "add_camera": "Add a camera",
     "camera_id": "Camera ID",
     "location": "Location : Auchan-Mbour-Entre",
+    "ownerUID" : "Enter Owner UID",
     "is_active": "Is active",
     "add_button": "Add",
     "link_users": "Link users",

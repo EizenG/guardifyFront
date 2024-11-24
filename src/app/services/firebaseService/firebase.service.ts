@@ -2,6 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Auth, UserCredential, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut,GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
+import { Firestore,addDoc,setDoc,collection, doc } from '@angular/fire/firestore';
+
 
 
 
@@ -10,6 +12,8 @@ import { Observable, from } from 'rxjs';
 })
 export class FirebaseService {
   firebaseAuth = inject(Auth);
+  firebaseFirestore = inject(Firestore);
+
 
   constructor() { }
 
@@ -31,6 +35,20 @@ export class FirebaseService {
   signOut() : Observable<void>{
     let promise = signOut(this.firebaseAuth);
     return from(promise);
+  }
+
+  addDocument(collectionName : string,data : any,documentId ?: string) : Observable<any>{
+    let promise;
+   if(documentId){
+    let collectionRef = collection(this.firebaseFirestore,collectionName);
+    let docRef = doc(collectionRef,documentId)
+    promise = setDoc(docRef,data);
+   }else{
+    let collectionRef = collection(this.firebaseFirestore,collectionName);
+    promise = addDoc(collectionRef,data);
+   }
+
+   return from(promise);
   }
 
 

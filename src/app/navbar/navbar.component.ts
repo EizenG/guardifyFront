@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, TemplateRef, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, TemplateRef, ViewChild, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
 import { Router, RouterLink} from '@angular/router';
@@ -17,7 +17,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
 
   @ViewChild('selfClosingAlertError', { static: false }) selfClosingAlertError !: NgbAlert;
   @ViewChild('selfClosingAlertSuccess', { static: false }) selfClosingAlertSuccess !: NgbAlert;
@@ -70,6 +70,14 @@ export class NavbarComponent {
 
 
   }
+  ngOnDestroy(): void {
+    if(this.errorMessageSubscription){
+      this.errorMessageSubscription.unsubscribe();
+    }
+    if(this.successMessageSubscription){
+      this.successMessageSubscription.unsubscribe();
+    }
+  }
 
   isActiveUrl(url : string): boolean{
     return this.router.url === url;
@@ -96,10 +104,19 @@ export class NavbarComponent {
       this.firebaseService.signOut().subscribe(
         {
           next: () => {
-            this.msgService.changeSuccessMessage('Vous êtes désormais déconnecté');
+            if(localStorage.getItem("langue") == "fr"){
+              this.msgService.changeSuccessMessage('Vous êtes désormais déconnecté');
+            }else{
+              this.msgService.changeSuccessMessage('You are now logged out.');
+            }
+            
           },
           error: () => {
-            this.msgService.changeSuccessMessage('Attention une erreur est survenue !!!');
+            if (localStorage.getItem("langue") == "fr") {
+              this.msgService.changeErrorMessage('Attention une erreur est survenue !!!');
+            } else {
+              this.msgService.changeErrorMessage("Warning: An error has occurred.");
+            }     
           }
         }
       );
