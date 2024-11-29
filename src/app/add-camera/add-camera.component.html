@@ -1,12 +1,47 @@
+
+<div class="popupLayer" [ngStyle]="{'display' : (isPopupInfVisible)?'flex':'none'}">
+  <div class="popup">
+    <div><i (click)="isPopupInfVisible = false;" style="color:#9799FB;" class="fa-solid fa-xmark"></i></div>
+    <div>
+      <h4>Attention</h4>
+      <p>
+        Vous avez modifié votre nom dans le formulaire.
+        Si vous confirmez, cette modification sera prise en compte et le nom sera également mis à jour dans vos informations de
+        profil.
+      </p>
+
+      <div>
+        <button (click)="updateDisplayNamePopup('cancel')" class="button-33" type="button">Annuler</button>
+        <button (click)="updateDisplayNamePopup('confirm')" class="button-33" type="button">Confirmer</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 <div id="mainContainer">
   <main>
     <h1>{{ "addCameraPage.add_camera" | translate }}</h1>
-    <form [formGroup]="addCameraForm" (submit)="addCamera()">
-      <div>
+    <form [formGroup]="addCameraForm" (submit)="addCamera($event)">
+      <p *ngIf="!isAdmin">{{"addCameraPage.message" | translate }}</p>
+      <div *ngIf="isAdmin">
         <label for="id_ownerUID"></label>
         <input [ngStyle]="(addCameraForm.get('ownerUID')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
-          [placeholder]="'addCameraPage.ownerUID' | translate" formControlName="ownerUID" type="text" name="id_ownerUID"
+          [placeholder]="'addCameraPage.ownerUID' | translate" formControlName="ownerUID" type="text" name="ownerUID"
           id="id_ownerUID">
+      </div>
+
+      <div>
+        <label for="id_name"></label>
+        <input [ngStyle]="(addCameraForm.get('name')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
+          [placeholder]="'addCameraPage.name' | translate" formControlName="name" type="text" name="name"
+          id="id_name">
+      </div>
+
+      <div style="display: none;">
+        <label for="id_email"></label>
+        <input [ngStyle]="(addCameraForm.get('email')?.invalid)?{'background-color':'rgb(255,204,203)'}:{'border':'none'}"
+          [placeholder]="'addCameraPage.email' | translate" formControlName="email" type="email" name="email" id="id_email">
       </div>
 
       <div>
@@ -24,7 +59,7 @@
             {{"addCameraPage.locationMaxCaracterError" | translate}}
           </p>
       </div>
-      <div>
+      <div id="checkboxContainer">
         <div class="checkbox-wrapper-5">
           <div class="check">
             <input formControlName="status" type="checkbox" name="status " id="status">
@@ -36,8 +71,6 @@
       <div>
         <button [disabled]="!addCameraForm.valid" class="button-33" type="submit" role="button">{{
           "addCameraPage.add_button" | translate }}</button>
-        <button (click)="linkUsers()" [disabled]="!addCameraForm.valid" class="button-33" type="button" role="button">{{
-          "addCameraPage.link_users" | translate }}</button>
       </div>
     </form>
   </main>

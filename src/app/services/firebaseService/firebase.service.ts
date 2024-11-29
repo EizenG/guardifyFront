@@ -1,8 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, UserCredential, createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, signOut,GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
+import {
+  Auth, UserCredential, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, User, updatePassword
+} from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
-import { Firestore,addDoc,setDoc,collection, doc } from '@angular/fire/firestore';
+import { Firestore, addDoc, setDoc, collection, doc } from '@angular/fire/firestore';
+import { updateProfile } from '@angular/fire/auth';
+import { IUserNew } from './INewUser';
 
 
 
@@ -17,38 +21,43 @@ export class FirebaseService {
 
   constructor() { }
 
-  createNewUser(email : string, password : string) : Observable<UserCredential> {
-    let promise = createUserWithEmailAndPassword(this.firebaseAuth,email,password);
-    return from(promise);
-  }
-  
-  signIn(email : string, password : string) : Observable<UserCredential>{
-    let promise = signInWithEmailAndPassword(this.firebaseAuth,email,password);
+  createNewUser(email: string, password: string): Observable<UserCredential> {
+    let promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password);
     return from(promise);
   }
 
-  signInWithGoogle() : Observable<UserCredential>{
-    let promise = signInWithPopup(this.firebaseAuth,new GoogleAuthProvider());
+  signIn(email: string, password: string): Observable<UserCredential> {
+    let promise = signInWithEmailAndPassword(this.firebaseAuth, email, password);
     return from(promise);
   }
 
-  signOut() : Observable<void>{
+  signInWithGoogle(): Observable<UserCredential> {
+    let promise = signInWithPopup(this.firebaseAuth, new GoogleAuthProvider());
+    return from(promise);
+  }
+
+  signOut(): Observable<void> {
     let promise = signOut(this.firebaseAuth);
     return from(promise);
   }
 
-  addDocument(collectionName : string,data : any,documentId ?: string) : Observable<any>{
+  addDocument(collectionName: string, data: any, documentID : string): Observable<any> {
     let promise;
-   if(documentId){
-    let collectionRef = collection(this.firebaseFirestore,collectionName);
-    let docRef = doc(collectionRef,documentId)
-    promise = setDoc(docRef,data);
-   }else{
-    let collectionRef = collection(this.firebaseFirestore,collectionName);
-    promise = addDoc(collectionRef,data);
-   }
+    let collectionRef = collection(this.firebaseFirestore, collectionName);
+    let docRef = doc(collectionRef, documentID)
+    promise = setDoc(docRef, data);
 
-   return from(promise);
+    return from(promise);
+  }
+
+  updateUserDisplayName(data: IUserNew): Observable<any> {
+    const promise = updateProfile(this.firebaseAuth.currentUser as User, data);
+    return from(promise);
+  }
+
+  updatePassword(newPassword: string, user : User): Observable<any>{
+    let promise = updatePassword(user, newPassword);
+    return from(promise);
   }
 
 

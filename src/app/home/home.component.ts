@@ -8,7 +8,7 @@ import { TranslationService } from '../services/translation/translation.service'
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
-import { emailjsConfig } from '../../../emailConfig';
+import { emailjsConfigContactUs } from '../../../emailConfig';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription, debounceTime, tap } from 'rxjs';
 import { MessageService } from '../services/message.service';
@@ -17,11 +17,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TranslateModule,ReactiveFormsModule,NgbAlertModule],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule, NgbAlertModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit,OnDestroy {
+export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild("mainContainer") mainContainer !: ElementRef;
   @ViewChildren("h5Tag") h5Tags !: QueryList<ElementRef>;
   @ViewChild('selfClosingAlertError', { static: false }) selfClosingAlertError !: NgbAlert;
@@ -40,10 +40,10 @@ export class HomeComponent implements AfterViewInit,OnDestroy {
   msgService = inject(MessageService);
 
   contactUsForm = this.fb.group({
-    name : ['',Validators.required],
-    email : ['',[Validators.required,Validators.email]],
-    tel : ['',Validators.required],
-    message : ['',Validators.required]
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    tel: ['', Validators.required],
+    message: ['', Validators.required]
   });
 
   userUid: string | null = null;
@@ -117,9 +117,9 @@ export class HomeComponent implements AfterViewInit,OnDestroy {
   sendEmail(e: Event) {
     e.preventDefault();
 
-    emailjs.sendForm(emailjsConfig.serviceId, emailjsConfig.homeEmailTemplate, e.target as HTMLFormElement, {
-        publicKey: emailjsConfig.publicKey,
-      })
+    emailjs.sendForm(emailjsConfigContactUs.serviceId, emailjsConfigContactUs.homeEmailTemplate, e.target as HTMLFormElement, {
+      publicKey: emailjsConfigContactUs.publicKey,
+    })
       .then(
         () => {
           if (localStorage.getItem("langue") == "fr") {
@@ -129,9 +129,9 @@ export class HomeComponent implements AfterViewInit,OnDestroy {
           }
         },
         (error) => {
-          if(localStorage.getItem("langue") == "fr"){
+          if (localStorage.getItem("langue") == "fr") {
             this.msgService.changeErrorMessage("L'envoi du mail a échoué.");
-          }else{
+          } else {
             this.msgService.changeErrorMessage("The email failed to send.");
           }
         },

@@ -70,6 +70,10 @@
     }
   },
   "addCameraPage": {
+    "message" : "Soumettez votre demande, et nous la traiterons dès que possible.",
+    "name" : "Nom complet",
+    "email" : "Addresse email",
+    "tel": "Telephone",
     "add_camera": "Ajouter une caméra ",
     "camera_id": "Id caméra",
     "ownerUID" : "Entrez l'UID du propriétaire" ,

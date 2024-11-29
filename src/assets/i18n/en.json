@@ -138,7 +138,11 @@
   },
 
   "addCameraPage": {
+    "message": "Submit your request, and we will process it as soon as possible",
     "add_camera": "Add a camera",
+    "name" : "Full name",
+    "email" : "Email address",
+    "tel" : "Phone",
     "camera_id": "Camera ID",
     "location": "Location : Auchan-Mbour-Entre",
     "ownerUID" : "Enter Owner UID",
