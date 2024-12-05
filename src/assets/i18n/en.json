@@ -41,11 +41,11 @@
   },
   "params": {
     "accountSettings": "Account Settings",
-    "firstName": "First Name",
-    "lastName": "Last Name",
+    "fullName": "Full name",
     "telephone": "Phone",
     "saveButton": "Save",
     "passwordChange": "Change Password",
+    "unableToChangePassword": "To change your password, please go to your Google account.",
     "currentPassword": "Current Password",
     "newPassword": "New Password",
     "passwordRequirements": "The password must contain at least 8 characters, including an uppercase letter, a lowercase letter, and a number.",

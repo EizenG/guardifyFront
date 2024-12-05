@@ -41,11 +41,11 @@
   },
   "params": {
     "accountSettings": "Paramètre du compte",
-    "firstName": "Prénom",
-    "lastName": "Nom",
+    "fullName": "Nom complet",
     "telephone": "Téléphone",
     "saveButton": "Sauvegarder",
     "passwordChange": "Changement de mot de passe",
+    "unableToChangePassword" : "Pour changer votre mot de passe, veuillez vous rendre dans votre compte Google.",
     "currentPassword": "Mot de passe actuel",
     "newPassword": "Nouveau mot de passe",
     "passwordRequirements": "Le mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule et un chiffre.",

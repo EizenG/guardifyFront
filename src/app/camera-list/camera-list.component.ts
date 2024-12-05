@@ -48,122 +48,7 @@ export class CameraListComponent implements AfterViewInit {
 
   //il faut limiter le champ location a 40 caracteres
   items : Camera[] = []
-  cameraData : Camera[] = [
-    {
-      "id_camera": "47392",
-      "location": "Auchan Dakar Sud",
-      "permissions": [2, 4],
-      "status": true,
-      "isOwner": true
-    }
-  ];
-  fakeData: Camera[] = [
-    {
-      "id_camera": "47392",
-      "location": "Auchan Dakar Sud ffffffffffffffffffffffffffffffffffffffffff",
-      "permissions": [2, 4],
-      "status": true,
-      "isOwner": true
-    },
-    {
-      "id_camera": "58374",
-      "location": "Carrefour Mbour Nord",
-      "permissions": [1, 3],
-      "status": false,
-      "isOwner": false
-    },
-    {
-      "id_camera": "78921",
-      "location": "Auchan Thiès Ouest",
-      "permissions": [1, 2],
-      "status": true,
-      "isOwner": false
-    },
-    {
-      "id_camera": "91234",
-      "location": "Super U Rufisque Centre",
-      "permissions": [3, 5],
-      "status": true,
-      "isOwner": true
-    },
-    {
-      "id_camera": "13467",
-      "location": "Auchan Saint-Louis",
-      "permissions": [1, 3],
-      "status": false,
-      "isOwner": true
-    },
-    {
-      "id_camera": "25678",
-      "location": "Super U Dakar Plateau",
-      "permissions": [1, 2],
-      "status": true,
-      "isOwner": false
-    },
-    {
-      "id_camera": "34892",
-      "location": "Auchan Mbour Sud",
-      "permissions": [2, 5],
-      "status": false,
-      "isOwner": false
-    },
-    {
-      "id_camera": "47389",
-      "location": "Carrefour Thiès Est",
-      "permissions": [1, 4],
-      "status": true,
-      "isOwner": true
-    },
-    {
-      "id_camera": "58213",
-      "location": "Auchan Dakar Nord",
-      "permissions": [3, 5],
-      "status": true,
-      "isOwner": false
-    },
-    {
-      "id_camera": "93458",
-      "location": "Carrefour Kaolack",
-      "permissions": [2, 3],
-      "status": false,
-      "isOwner": false
-    },
-    {
-      "id_camera": "23984",
-      "location": "Super U Ziguinchor",
-      "permissions": [1, 4],
-      "status": true,
-      "isOwner": true
-    },
-    {
-      "id_camera": "19872",
-      "location": "Auchan Matam",
-      "permissions": [2, 3],
-      "status": false,
-      "isOwner": false
-    },
-    {
-      "id_camera": "58743",
-      "location": "Super U Fatick",
-      "permissions": [1, 5],
-      "status": true,
-      "isOwner": false
-    },
-    {
-      "id_camera": "64573",
-      "location": "Carrefour Louga",
-      "permissions": [3, 4],
-      "status": false,
-      "isOwner": true
-    },
-    {
-      "id_camera": "38975",
-      "location": "Auchan Diourbel",
-      "permissions": [2, 4],
-      "status": true,
-      "isOwner": true
-    }
-  ]
+  cameraData : Camera[] = [];
 
   translate = inject(TranslateService);
   firebaseService = inject(FirebaseService);
@@ -240,7 +125,7 @@ export class CameraListComponent implements AfterViewInit {
   loadPageData($event: number) {
     const startIndex = (this.page - 1) * this.pageSize; // Calcul de l'index de début
     const endIndex = startIndex + this.pageSize; // Calcul de l'index de fin
-    this.items = this.fakeData.slice(startIndex, endIndex); // Slicing des éléments
+    this.items = this.cameraData.slice(startIndex, endIndex); // Slicing des éléments
   }
   ngAfterViewInit(): void {
     let totalHeight = 0;
@@ -264,7 +149,7 @@ export class CameraListComponent implements AfterViewInit {
 
     this.noDataImgElt.nativeElement.style.height = `${window.innerHeight - totalHeight - 100}px`;
     
-    this.items = this.fakeData.slice(0, this.pageSize);
+    // this.items = this.fakeData.slice(0, this.pageSize);
     this.cdref.detectChanges();
     this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
   }

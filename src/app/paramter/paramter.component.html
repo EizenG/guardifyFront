@@ -1,3 +1,5 @@
+<ngx-loading [show]="loading" [config]="loadersConfig"></ngx-loading>
+
 <main>
   <div ngbAccordion [closeOthers]="true">
     <div ngbAccordionItem [collapsed]="!isCollasped">
@@ -7,17 +9,13 @@
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
           <ng-template>
-            <form [formGroup]="accountParamForm">
+            <form [formGroup]="accountParamForm" (submit)="updateAccountDetail()">
               <div class="formInput">
-                <label for="firstName" hidden>First name</label>
+                <label for="fullName" hidden>Full name</label>
                 <i class="fa-solid fa-user"></i>
-                <input maxlength="25" formControlName="firstName" [placeholder]="'params.firstName' | translate" type="text" name="firstName" id="firstName">
+                <input maxlength="50" formControlName="fullName" [placeholder]="'params.fullName' | translate" type="text" name="fullName" id="fullName">
               </div>
-              <div class="formInput">
-                <label for="lastName" hidden>Last name</label>
-                <i class="fa-solid fa-user"></i>
-                <input maxlength="25" formControlName="lastName" [placeholder]="'params.lastName' | translate" type="text" name="lastName" id="lastName">
-              </div>
+        
               <div class="formInput">
                 <label for="tel" hidden>Telephone</label>
                 <i class="fa-solid fa-phone"></i>
@@ -38,11 +36,12 @@
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
           <ng-template>
-            <form [formGroup]="changePasswordForm">
+            <form (submit)="changePassword()" [formGroup]="changePasswordForm">
+              <p *ngIf="user!.providerData[0].providerId == 'google.com'" style="font-size:20px;">{{"params.unableToChangePassword" | translate}}</p>
               <div class="formInput">
                 <label for="currentPassword" hidden>Current password</label>
                 <i class="fa-solid fa-lock"></i>
-                <input [ngClass]="{'invalid' : getFormControl('oldPassword')?.touched && getFormControl('oldPassword')?.invalid}" maxlength="20" formControlName="oldPassword" [placeholder]="'params.currentPassword' | translate " type="password" name="currentPassword" id="currentPassword">
+                <input  [ngClass]="{'invalid' : getFormControl('oldPassword')?.touched && getFormControl('oldPassword')?.invalid}" maxlength="20" formControlName="oldPassword" [placeholder]="'params.currentPassword' | translate " type="password" name="currentPassword" id="currentPassword">
               </div>
               <div class="formInput">
                 <label for="newPassword" hidden>New password</label>
@@ -58,7 +57,7 @@
                 <input [ngClass]="{'invalid': changePasswordForm.hasError('passwordNotConfirm') && getFormControl('newPassword')?.valid}" maxlength="20" formControlName="confirmPassword" [placeholder]="'params.confirmNewPassword' | translate " type="password" name="confirmNewPassword" id="confirmNewPassword">
               </div>
             
-              <button [disabled]="changePasswordForm.invalid" class="button-33" type="submit">{{"params.changeButton" | translate }}</button>
+              <button [disabled]="changePasswordForm.invalid || user!.providerData[0].providerId == 'google.com'" class="button-33" type="submit">{{"params.changeButton" | translate }}</button>
             </form>
           </ng-template>
         </div>

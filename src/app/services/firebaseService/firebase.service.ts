@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import {
   Auth, UserCredential, createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, User, updatePassword
+  signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, User, updatePassword, reauthenticateWithCredential, AuthCredential, EmailAuthCredential, EmailAuthProvider
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
-import { Firestore, addDoc, setDoc, collection, doc } from '@angular/fire/firestore';
+import { Firestore, getDoc, setDoc, collection, doc, getDocs,query,where } from '@angular/fire/firestore';
 import { updateProfile } from '@angular/fire/auth';
 import { IUserNew } from './INewUser';
 
@@ -50,12 +50,35 @@ export class FirebaseService {
     return from(promise);
   }
 
+  getDocument(collectionName: string,documentId: string): Observable<any>{
+    let collectionRef = collection(this.firebaseFirestore, collectionName);
+    let docRef = doc(collectionRef, documentId);
+    return from(getDoc(docRef))
+  }
+
+  getUserCameras(userUid : string): void{
+    const collectionRef = collection(this.firebaseFirestore, "cameras");
+    const q1 = query(collectionRef, where("ownerUID", "==", userUid));
+    const q2 = query(collectionRef, where("ownerUID", "==", userUid));
+    // Query and get all cameras associates with an user
+  }
+
   updateUserDisplayName(data: IUserNew): Observable<any> {
     const promise = updateProfile(this.firebaseAuth.currentUser as User, data);
     return from(promise);
   }
 
-  updatePassword(newPassword: string, user : User): Observable<any>{
+  reauthenticate(user: User,oldPassword : string): Observable<any>{
+    let credential: AuthCredential = EmailAuthProvider.credential(
+      user.email as string,
+      oldPassword
+    );
+    let promise = reauthenticateWithCredential(user, credential);
+    return from(promise);
+    
+  }
+
+  updatePassword(newPassword: string, user: User): Observable<any>{
     let promise = updatePassword(user, newPassword);
     return from(promise);
   }
