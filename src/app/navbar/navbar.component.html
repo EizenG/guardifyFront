@@ -1,3 +1,4 @@
+
 <div id="OperationResultInf">
   @if (errorMessage) {
   <ngb-alert #selfClosingAlertError type="danger" (closed)="errorMessage = ''">{{ errorMessage }}</ngb-alert>
@@ -47,7 +48,7 @@
       <h5 (click)="navigateTo('/add-camera');offcanvas.dismiss('Cross click')" #h5Tag>{{"sidebar.add_camera" | translate }}</h5>
       </div>
       <div [ngClass]="{'isActive': isActiveUrl('/camera-list')}">
-        <a routerLink="/camera-list" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/notepad.svg" alt="icon notepad"></a>
+        <a [routerLink] ="[userUid,'camera-list']" (click)="offcanvas.dismiss('Cross click')"><img src="../../assets/icons/notepad.svg" alt="icon notepad"></a>
         <h5 #h5Tag (click)="navigateTo('/camera-list');offcanvas.dismiss('Cross click')">{{"sidebar.view_cameras" | translate }}</h5>
       </div>
       <div [ngClass]="{'isActive': isActiveUrl('/infraction-videos')}">

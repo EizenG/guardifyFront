@@ -5,18 +5,18 @@ import { CameraListComponent } from './camera-list/camera-list.component';
 import { AddCameraComponent } from './add-camera/add-camera.component';
 import { AuthoriesAccessComponent } from './authories-access/authories-access.component';
 import { CameraStreamComponent } from './camera-stream/camera-stream.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { ParamterComponent } from './paramter/paramter.component';
 import { OffenceVideoComponent } from './offence-video/offence-video.component';
 import { CameraParameterComponent } from './camera-parameter/camera-parameter.component';
 import { UnauthorizeComponent } from './unauthorize/unauthorize.component';
 import { addCameraGuardAdmin, addCameraGuardNoAdmin } from './services/routerGuard/addCameraGuard';
 import { authGuard } from './services/routerGuard/auth.guard';
+import { camerasResolver } from './services/resolvers/cameras.resolver';
 
 export const routes: Routes = [
   { path: "", component: HomeComponent, title: "Guardify - Home" },
   { path: "login-logout", component: AuthComponent, title: "Guardify - Login/Logout" },
-  { path: "camera-list", component: CameraListComponent, title: "Guardify - Camera's list" },
+  { path: ":userUID/camera-list", component: CameraListComponent, title: "Guardify - Camera's list",resolve : {cameras : camerasResolver} },
   {
     path: "add-camera",
     children: [

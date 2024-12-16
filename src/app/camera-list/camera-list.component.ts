@@ -1,15 +1,18 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
-import { Camera } from '../customType/camera';
 import { IDropdownSettings, NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { dropdownListPermissions,dropdownSettingsPermissions } from '../data/permissionsDropdown';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
 import { onAuthStateChanged } from '@angular/fire/auth';
 import { FirebaseService } from '../services/firebaseService/firebase.service';
+import { Observable, map } from 'rxjs';
+import { QueryDocumentSnapshot } from '@angular/fire/firestore';
+import { loaderService } from '../services/loader.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-camera-list',
@@ -19,7 +22,7 @@ import { FirebaseService } from '../services/firebaseService/firebase.service';
   templateUrl: './camera-list.component.html',
   styleUrl: './camera-list.component.scss'
 })
-export class CameraListComponent implements AfterViewInit {
+export class CameraListComponent implements AfterViewInit,OnInit {
   @ViewChildren("getEltHeight") eltsBeforeList !: QueryList<ElementRef>;
   @ViewChild("noData") noDataImgElt !: ElementRef<HTMLImageElement>;
   
@@ -47,15 +50,17 @@ export class CameraListComponent implements AfterViewInit {
   userUID : string | null = null;
 
   //il faut limiter le champ location a 40 caracteres
-  items : Camera[] = []
-  cameraData : Camera[] = [];
+  items : any = []
+  cameraData : any = [];
 
   translate = inject(TranslateService);
   firebaseService = inject(FirebaseService);
   router = inject(Router);
+  loaderService = inject(loaderService);
+  msgService = inject(MessageService);
 
 
-  constructor(private cdref: ChangeDetectorRef){
+  constructor(private cdref: ChangeDetectorRef,private activatedRoute : ActivatedRoute){
     const langue = localStorage.getItem("langue");
     if (langue && langues.includes(langue)) {
       this.translate.setDefaultLang(langue);
@@ -71,6 +76,28 @@ export class CameraListComponent implements AfterViewInit {
       }
     });
     
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe({
+      next: (data) => { 
+        this.cameraData = (data["cameras"].docs as QueryDocumentSnapshot[]).map(item => {
+          return { id_camera : item.id, ...item.data()}
+        });
+        this.loaderService.changeLoaderStatus(false);
+        this.items = this.cameraData.slice(0, this.pageSize);
+        console.log(this.items)
+      }
+      , error: () => {
+        this.cameraData = [];
+        this.loaderService.changeLoaderStatus(false);
+        if (localStorage.getItem("langue") == "fr") {
+          this.msgService.changeErrorMessage("Problème survenu lors du chargement des données.");
+        } else {
+          this.msgService.changeErrorMessage("An error occurred while loading the data.");
+        }
+      }
+    })
   }
   
   onItemSelectStatus(item: any) {
@@ -149,7 +176,6 @@ export class CameraListComponent implements AfterViewInit {
 
     this.noDataImgElt.nativeElement.style.height = `${window.innerHeight - totalHeight - 100}px`;
     
-    // this.items = this.fakeData.slice(0, this.pageSize);
     this.cdref.detectChanges();
     this.dropdownBtnList = document.querySelectorAll(".dropdown-btn");
   }

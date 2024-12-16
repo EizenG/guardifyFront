@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, TemplateRef, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { langues } from '../data/langues';
 import { Router, RouterLink} from '@angular/router';
@@ -7,8 +7,9 @@ import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../services/firebaseService/firebase.service';
 import { onAuthStateChanged } from '@angular/fire/auth'; 
 import { MessageService } from '../services/message.service';
-import { Subscription, debounceTime, tap } from 'rxjs';
+import {  Subscription, debounceTime, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { loaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-navbar',
@@ -28,12 +29,15 @@ export class NavbarComponent implements OnDestroy {
   firebaseService = inject(FirebaseService);
   cdref = inject(ChangeDetectorRef);
   msgService = inject(MessageService);
+  loaderService = inject(loaderService);
   errorMessage = '';
   successMessage = '';
   errorMessageSubscription: Subscription | null = null;
   successMessageSubscription: Subscription | null = null;
   userUid : string | null = null;
   currentActiveMenuItem !: HTMLDivElement;
+  isLoading !: boolean;
+  
 
   constructor(){
     const langue = localStorage.getItem("langue");
@@ -45,7 +49,7 @@ export class NavbarComponent implements OnDestroy {
 
     onAuthStateChanged(this.firebaseService.firebaseAuth, (user) => {
       if (user) {
-        this.userUid = user.email;
+        this.userUid = user.uid;
       } else {
         this.userUid = null;
       }
@@ -70,6 +74,8 @@ export class NavbarComponent implements OnDestroy {
 
 
   }
+
+
   ngOnDestroy(): void {
     if(this.errorMessageSubscription){
       this.errorMessageSubscription.unsubscribe();
@@ -83,8 +89,14 @@ export class NavbarComponent implements OnDestroy {
     return this.router.url === url;
   }
 
-  navigateTo(url: string) : void {
-    this.router.navigate([url]);
+  navigateTo(url: string): void {
+    if (url === "/camera-list") {
+      this.router.navigate([`${this.userUid}/camera-list`]);
+      this.loaderService.changeLoaderStatus(true);
+    } else {
+      this.router.navigate([url]);
+    }
+
   }
 
   openMenu(content: TemplateRef<any>, menuCheckbox : HTMLInputElement) : void{

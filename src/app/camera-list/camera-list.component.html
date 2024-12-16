@@ -68,13 +68,13 @@
       <div *ngFor="let item of items" class="cameraCard">
         <div [ngStyle]="(item.status)?{'background-color':'green'}:{'background-color':'red'}">
           <div>
-            <img [ngStyle]="(item.isOwner)?{'width': '73px','height': '90px'}:{'width': '70px','height': '70px','margin-top': '10px'}" [src]="(item.isOwner)?'../../assets/icons/ownership1.svg':'../../assets/icons/ownership2.svg'" alt="icon ownership">
+            <img [ngStyle]="(item.ownerUID == userUID)?{'width': '73px','height': '90px'}:{'width': '70px','height': '70px','margin-top': '10px'}" [src]="(item.ownerUID == userUID)?'../../assets/icons/ownership1.svg':'../../assets/icons/ownership2.svg'" alt="icon ownership">
           </div>
         </div>
 
         <div class="optionOnHover">
-          <button (click)="navigateToCameraStream()" [disabled]="(item.permissions.includes(2))?false:true" type="button" role="button">
-            <img [ngStyle]="(item.permissions.includes(2))?{'opacity':1,'cursor':'pointer'}:{'opacity':0.5,'cursor':'not-allowed'}"
+          <button (click)="navigateToCameraStream()" [disabled]="((item.ownerUID == userUID) || (item.adminsPermissions && item.adminsPermissions[userUID ?? ''].includes(2)))?false:true" type="button" role="button">
+            <img [ngStyle]="((item.ownerUID == userUID) || (item.adminsPermissions && item.adminsPermissions[userUID ?? ''].includes(2)))?{'opacity':1,'cursor':'pointer'}:{'opacity':0.5,'cursor':'not-allowed'}"
               src="../../assets/icons/media.svg" alt="media icon">
           </button>
           
@@ -90,7 +90,7 @@
           <p>
             {{"cameraListPage.camera_id" | translate}} : {{ item.id_camera }} <br>
             {{"cameraListPage.location" | translate}} : {{ item.location }} <br>
-            {{"cameraListPage.permissions_code" | translate}} {{ item.permissions }}
+            {{"cameraListPage.permissions_code" | translate}} {{ (item.ownerUID == userUID)?'1,2,3':item.adminsPermissions[userUID ?? ''].join(',')}}
           </p>
         </div>
       </div>

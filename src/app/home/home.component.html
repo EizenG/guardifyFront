@@ -1,3 +1,5 @@
+<ngx-loading [show]="isLoading" [config]="loadersConfig"></ngx-loading>
+
 <div id="OperationResultInf">
   @if (errorMessage) {
   <ngb-alert #selfClosingAlertError type="danger" (closed)="errorMessage = ''">{{ errorMessage }}</ngb-alert>

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../services/firebaseService/firebase.service';
 import { onAuthStateChanged } from '@angular/fire/auth';
@@ -13,15 +13,17 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription, debounceTime, tap } from 'rxjs';
 import { MessageService } from '../services/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { loaderService } from '../services/loader.service';
+import { NgxLoadingModule,ngxLoadingAnimationTypes } from 'ngx-loading';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ReactiveFormsModule, NgbAlertModule],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule, NgbAlertModule,NgxLoadingModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
+export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild("mainContainer") mainContainer !: ElementRef;
   @ViewChildren("h5Tag") h5Tags !: QueryList<ElementRef>;
   @ViewChild('selfClosingAlertError', { static: false }) selfClosingAlertError !: NgbAlert;
@@ -32,12 +34,19 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   successMessageSubscription: Subscription | null = null;
   @ViewChild('frFlag') frFlagImg !: ElementRef;
   @ViewChild('ukFlag') ukFlagImg !: ElementRef;
+  isLoading: boolean = false;
+  loadersConfig = {
+    backdropBorderRadius: '3px',
+    primaryColour: 'rgb(151, 153, 251)',
+    animationType: ngxLoadingAnimationTypes.circle
+  };
 
   // Services
   firebaseService = inject(FirebaseService);
   router = inject(Router);
   fb = inject(FormBuilder);
   msgService = inject(MessageService);
+  loaderService = inject(loaderService);
 
   contactUsForm = this.fb.group({
     name: ['', Validators.required],
@@ -83,6 +92,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       )
       .subscribe(() => this.selfClosingAlertSuccess?.close());
 
+  }
+
+  ngOnInit(): void {
+    this.loaderService._loader$.subscribe({
+      next: (value) => {
+        this.isLoading = value;
+      }
+    });
   }
 
   ngOnDestroy(): void {

@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, User, updatePassword, reauthenticateWithCredential, AuthCredential, EmailAuthCredential, EmailAuthProvider
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
-import { Firestore, getDoc, setDoc, collection, doc, getDocs,query,where } from '@angular/fire/firestore';
+import { Firestore, getDoc, setDoc, collection, doc, getDocs,query,where,or } from '@angular/fire/firestore';
 import { updateProfile } from '@angular/fire/auth';
 import { IUserNew } from './INewUser';
 
@@ -56,11 +56,11 @@ export class FirebaseService {
     return from(getDoc(docRef))
   }
 
-  getUserCameras(userUid : string): void{
+  getUserCameras(userUid : string): Observable<any>{
     const collectionRef = collection(this.firebaseFirestore, "cameras");
-    const q1 = query(collectionRef, where("ownerUID", "==", userUid));
-    const q2 = query(collectionRef, where("ownerUID", "==", userUid));
-    // Query and get all cameras associates with an user
+    const q = query(collectionRef, or(where("ownerUID", "==", userUid), where("admins", "array-contains", userUid)));
+    let promise = getDocs(q);
+    return from(promise);
   }
 
   updateUserDisplayName(data: IUserNew): Observable<any> {
